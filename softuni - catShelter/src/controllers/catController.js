@@ -1,11 +1,18 @@
 const catDb = require('../catsDb.json');
 const save = require('../models/breeds');
 const breedDb = require('../breedDb.json');
+const addCat = require('../models/addCat');
 
 
 exports.getAddCatPage = (req, res) => {
     res.render('addCat', {breeds: breedDb});
 }
+
+exports.postCat = (req, res) => {
+        addCat(req, res);
+    
+}
+
 
 exports.getAddBreedPage = (req, res) => {
     res.render('addBreed');
