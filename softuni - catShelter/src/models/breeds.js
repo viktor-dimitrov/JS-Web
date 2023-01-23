@@ -6,12 +6,12 @@ const dir = path.resolve(__dirname, '../breedDb.json');
 exports.saveBreed = (req, res) => {
     const input = req.body.breed;
     const breeds = breedDb.map(el => el = el.breed.toLowerCase());
-    console.log(breeds)
+  
     if(input.length < 3 ){
-      res.render('addBreed', {message: "The breed must have at least three letters!"})
+      res.render('addBreed', {message: "The breed must have at least three letters!"});
         return
     } else if (breeds.includes(input.toLowerCase())){
-        res.render('addBreed', {message: `We already have breed "${input}" in the list!`})
+        res.render('addBreed', {message: `We already have breed "${input}" in the list!`});
         return
     } else {
         breedDb.push(req.body);
