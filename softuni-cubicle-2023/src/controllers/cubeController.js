@@ -1,15 +1,15 @@
-const { save } = require('../models/Cube');
-const Cube = require('../models/Cube');
-const db = require('../db.json');
+
+const Cube = require('../models/cubes');
+// const db = require('../modelswefwefwe');
 
 
 exports.createView = (req, res) => {
         res.render('create');
 }
 
-exports.addCube = (req, res) => {
+exports.addCube = async (req, res) => {
     let cube = new Cube(req.body);
-    save(cube);
+    await cube.save()
     res.redirect('/');
 }
 
