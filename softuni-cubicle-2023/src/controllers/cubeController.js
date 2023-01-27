@@ -1,5 +1,5 @@
 
-const Cube = require('../models/cubes');
+const Cube = require('../models/cube');
 // const db = require('../modelswefwefwe');
 
 
