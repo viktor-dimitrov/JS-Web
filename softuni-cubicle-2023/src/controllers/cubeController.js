@@ -13,8 +13,7 @@ exports.addCube = async (req, res) => {
     res.redirect('/');
 }
 
-exports.detailsView = (req, res) => {
-    const id = Number(req.params.id);
-    const selectedCube = db.find(cube => cube.id === id);
+exports.detailsView = async (req, res) => {
+    const selectedCube = await Cube.findById(req.params._id).lean();
     res.render('details', {cube: selectedCube});
 }

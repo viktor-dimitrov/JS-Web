@@ -9,7 +9,7 @@ router.get('/', homeController.homeView);
 router.get('/about', homeController.aboutView);
 router.get('/create', cubeController.createView);
 router.post('/create', cubeController.addCube);
-router.get('/details/:id', cubeController.detailsView);
+router.get('/details/:_id', cubeController.detailsView);
 router.get('*', homeController.notFound);
 
 
