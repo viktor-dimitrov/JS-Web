@@ -1,7 +1,7 @@
 
 const Cube = require('../models/cube');
 
-exports.createView = (req, res) => {
+exports.createCubeView = (req, res) => {
     res.render('create');
 }
 
