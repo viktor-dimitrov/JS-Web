@@ -3,22 +3,21 @@ const Cube = require('../models/cube');
 
 exports.homeView = async (req, res) => {
     const {search , from, to} = req.query;
-  
-    let cubes = await Cube.find().lean();
 
+    const expressions = [];
+      
     if(search) {
-        cubes = db.filter(cube => cube.name.toLowerCase().includes(search.toLowerCase()));
+        expressions.push({'name': {$regex: `${search}`, $options: 'i'}});
     }
     if(from) {
-        cubes = db.filter(cube => Number(cube.difficultyLevel) >= Number(from));
+        expressions.push({'difficultyLevel': {$gte: from}});
     }
-    if(to) {
-        cubes = db.filter(cube => Number(cube.difficultyLevel) <= Number(to));
-    }
-    if(from && to) {
-        cubes = db.filter(cube => Number(cube.difficultyLevel) >= Number(from) && Number(cube.difficultyLevel) <= Number(to));
+    if(to){
+        expressions.push({'difficultyLevel': {$lte: to}});
     }
 
+    let cubes = await Cube.find({$and: expressions}).lean();
+   
     res.render('index', {cubes , search, from, to});
 }
 

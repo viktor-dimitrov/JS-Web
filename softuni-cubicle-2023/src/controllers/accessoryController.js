@@ -9,13 +9,20 @@ exports.createAccessoryView = (req, res) => {
 
 exports.addAccessory = async (req, res) => {
     const accessory = new Accessory(req.body);
-    await accessory.save();
-    res.redirect('/');
+    
+    try{
+        await accessory.save();
+        res.redirect('/');
+    }catch(err){
+        console.log(err.message);
+        res.redirect('/404')
+    }
+
 }
 
 exports.attachAccessoryView = async (req, res) => {
     const selectedCube = await Cube.findById(req.params._id).lean();
-    const accessories = await Accessory.find().lean();
+    const accessories = await Accessory.find({_id: { $nin: selectedCube.accessories }}).lean();
 
 
     res.render('attachAccessory', {cube: selectedCube, accessories});

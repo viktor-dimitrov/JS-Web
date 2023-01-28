@@ -7,8 +7,14 @@ exports.createCubeView = (req, res) => {
 
 exports.addCube = async (req, res) => {
     let cube = new Cube(req.body);
-    await cube.save();
-    res.redirect('/');
+    try{
+        await cube.save();
+        res.redirect('/');
+    }catch(err){
+        console.log(err.message);
+        res.redirect('/404')
+    }
+
 }
 
 exports.detailsView = async (req, res) => {

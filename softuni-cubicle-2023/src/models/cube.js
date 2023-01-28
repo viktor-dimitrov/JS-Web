@@ -14,7 +14,12 @@ const cubeSchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required:true,
-        // http/https validationa expect !!
+        validate:{
+            validator: function(value) {
+                return value.startsWith('http://') || value.startsWith('https://')
+            },
+            message: 'Invalid URL!!!'
+        },
     },
     difficultyLevel: {
         type: Number,

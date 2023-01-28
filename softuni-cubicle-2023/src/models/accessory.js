@@ -9,7 +9,12 @@ const accessorySchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
-     // validation for http/https
+        validate: {
+            validator: function(value) {
+                return value.startsWith('http://') || value.startsWith('https://')
+            },
+            message: 'Invalid URL!!!'
+        }
     },
     description: {
         type: String,
@@ -18,7 +23,7 @@ const accessorySchema = new mongoose.Schema({
     },
     cubes: [{
         type: mongoose.Types.ObjectId,
-        rel: 'Cube'
+        rel: 'Cube',
     }]
     
 });
