@@ -16,8 +16,16 @@ exports.addAccessory = async (req, res) => {
 exports.attachAccessoryView = async (req, res) => {
     const selectedCube = await Cube.findById(req.params._id).lean();
     const accessories = await Accessory.find().lean();
-    console.log(accessories);
-    
+
+
     res.render('attachAccessory', {cube: selectedCube, accessories});
+}
+
+exports.attachAccessoryToCube = async (req, res) => {
+    const selectedCube = await Cube.findById(req.params._id);
+    const accessoryId = req.body.accessory;
+    selectedCube.accessories.push(accessoryId);
+    selectedCube.save();
+    res.redirect(`/details/${selectedCube._id}`);
 }
 

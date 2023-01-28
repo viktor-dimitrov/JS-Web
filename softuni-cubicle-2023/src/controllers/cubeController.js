@@ -12,6 +12,7 @@ exports.addCube = async (req, res) => {
 }
 
 exports.detailsView = async (req, res) => {
-    const selectedCube = await Cube.findById(req.params._id).lean();
-    res.render('details', { cube: selectedCube });
+    const selectedCube = await Cube.findById(req.params._id).populate('accessories');
+   
+    res.render('details',  selectedCube );
 }
