@@ -6,6 +6,7 @@ const accessoryController = require('./controllers/accessoryController');
 
 router.get('/', homeController.homeView);
 router.get('/about', homeController.aboutView);
+
 router.get('/create/cube', cubeController.createCubeView);
 router.post('/create/cube', cubeController.addCube);
 

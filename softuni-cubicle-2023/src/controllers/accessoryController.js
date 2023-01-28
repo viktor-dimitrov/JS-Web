@@ -6,10 +6,9 @@ exports.createAccessoryView = (req, res) => {
     res.render('createAccessory');
 }
 
-
 exports.addAccessory = async (req, res) => {
     const accessory = new Accessory(req.body);
-    
+
     try{
         await accessory.save();
         res.redirect('/');

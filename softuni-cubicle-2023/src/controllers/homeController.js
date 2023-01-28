@@ -1,4 +1,4 @@
-// let db = require('../db.json');
+
 const Cube = require('../models/cube');
 
 exports.homeView = async (req, res) => {
