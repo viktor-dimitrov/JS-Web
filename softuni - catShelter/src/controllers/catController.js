@@ -1,7 +1,8 @@
-const catsDb = require('../catsDb.json');
+// const catsDb = require('../catsDb.json');
+const Cat = require('../models/cats');
 const save = require('../models/breeds');
 const breedDb = require('../breedDb.json');
-const addCat = require('../models/addCat');
+const addCat = require('../models/addCat_old');
 
 
 exports.getAddCatPage = (req, res) => {

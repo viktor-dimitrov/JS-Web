@@ -1,6 +1,7 @@
 
-const db = require('../catsDb.json');
+const Cat = require('../models/cats');
 
-exports.getHomePage = (req, res) => {
-    res.render('index', {cats: db});
+exports.getHomePage = async (req, res) => {
+    const cats =  await Cat.find().lean();
+    res.render('index', {cats});
 }
