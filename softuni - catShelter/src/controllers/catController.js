@@ -2,7 +2,7 @@
 const Cat = require('../models/cats');
 const save = require('../models/breeds');
 const breedDb = require('../breedDb.json');
-const addCat = require('../models/addCat_old');
+const addCat = require('../service/addCat');
 
 
 exports.getAddCatPage = (req, res) => {
@@ -10,7 +10,8 @@ exports.getAddCatPage = (req, res) => {
 }
 
 exports.postCat = async (req, res) => {
-       await addCat(req, res, catsDb);
+    const cats = await Cat.find().lean();
+        addCat(req, res, cats);
     res.redirect('/');
 }
 
