@@ -4,14 +4,13 @@ const save = require('../models/breeds');
 const breedDb = require('../breedDb.json');
 const addCat = require('../service/addCat');
 
-
 exports.getAddCatPage = (req, res) => {
     res.render('addCat', {breeds: breedDb});
 }
 
 exports.postCat = async (req, res) => {
     const cats = await Cat.find().lean();
-        addCat(req, res, cats);
+    addCat(req, res, cats);
     res.redirect('/');
 }
 
@@ -25,10 +24,10 @@ exports.postBreed = (req, res) => {
 
 }
 
-exports.getEditPage = (req, res) => {
-    const catId = Number(req.params.catId);
+exports.getEditPage = async (req, res) => {
+    const catId = req.params.catId;
 
-    const currCat = catsDb.find(cat => cat.id === catId);
-    
+    const currCat = await Cat.findById(catId).lean();
+    console.log(currCat)
     res.render('editCat', {breeds: breedDb, currCat });
 }
