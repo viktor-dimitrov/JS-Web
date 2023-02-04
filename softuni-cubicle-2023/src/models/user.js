@@ -22,8 +22,11 @@ const userSchema = new mongoose.Schema({
 userSchema.pre('save', async function(next){
     const hash = await bcrypt.hash(this.password, 5);
     this.password = hash;
-    console.log(hash)
     next();
+})
+
+userSchema.method('passValidation', async function(password){
+    return bcrypt.compare(password, this.password);
 })
 
 const User = mongoose.model('User', userSchema);

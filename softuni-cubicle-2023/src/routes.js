@@ -9,6 +9,7 @@ router.get('/', homeController.homeView);
 router.get('/about', homeController.aboutView);
 
 router.get('/login', authentController.loginView);
+router.post('/login', authentController.logUser);
 
 
 router.get('/register', authentController.registerView);
