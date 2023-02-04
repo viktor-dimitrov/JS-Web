@@ -1,15 +1,15 @@
 const authentService = require('../services/authentService');
 
+
 exports.loginView = (req, res) => {
     res.render('login');
 }
 
 exports.logUser = async (req, res) => {
     const {username, password} = req.body;
-
     try{
-        const user = await authentService.login(username, password);
-        
+        const token = await authentService.login(username, password);
+        res.cookie('token', token);
     }catch(err){
         console.log(err.message);
     }

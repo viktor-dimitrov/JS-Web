@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const signToken = require('./tokenService');
 
 
 exports.register = (username, password) => User.create({username, password});
@@ -13,5 +14,15 @@ exports.login = async (username, password) => {
         throw new Error( "Invalid username of password!");
      }
 
-    return user;
+     const payload = {
+        username: user.username,
+        userId: user._id,
+     }
+
+     const token = signToken(payload);
+
+     return token
+
+
+    
 }

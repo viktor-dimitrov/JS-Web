@@ -5,11 +5,13 @@ const config = require('./config');
 const setupViewEngine = require('./config/viewEngine');
 const router = require('./routes');
 const initDb = require('./config/dataBase');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 setupViewEngine(app);
 
 app.use(express.static('src/public'));
+app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 app.use(router);
 
