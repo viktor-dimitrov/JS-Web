@@ -3,9 +3,16 @@ const router = require('express').Router();
 const homeController = require('./controllers/homeController');
 const cubeController = require('./controllers/cubeController');
 const accessoryController = require('./controllers/accessoryController');
+const authentController = require('./controllers/authentController');
 
 router.get('/', homeController.homeView);
 router.get('/about', homeController.aboutView);
+
+router.get('/login', authentController.loginView);
+
+
+router.get('/register', authentController.registerView);
+router.post('/register', authentController.regUser);
 
 router.get('/create/cube', cubeController.createCubeView);
 router.post('/create/cube', cubeController.addCube);
