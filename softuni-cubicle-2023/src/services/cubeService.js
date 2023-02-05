@@ -15,3 +15,5 @@ exports.difficultyEnum = [
 exports.getThisCube = (cubeId) => Cube.findById(cubeId).populate('accessories').lean();
 
 exports.updateThisCube = (cubeId, data) => Cube.findByIdAndUpdate(cubeId, data);
+
+exports.deleteThisCube = (cubeId) => Cube.findByIdAndDelete(cubeId);

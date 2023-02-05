@@ -33,18 +33,22 @@ exports.editView = async (req, res) => {
 
 exports.deleteView = async (req, res) => {
     const thisCube = await cubeService.getThisCube(req.params._id);
-
     const difficultyLevel = cubeService.difficultyEnum.find(el => el.key == thisCube.difficultyLevel);
-    
-
     res.render('delete', {thisCube, difficultyLevel})
 }
+
 
 exports.updateCube = async (req, res) => {
     const cubeId = req.params._id;
     const data = req.body;
     await cubeService.updateThisCube(cubeId, data);
     res.redirect(`/details/${cubeId}`);
+
+}
+
+exports.deleteCube = async(req, res) => {
+    await cubeService.deleteThisCube(req.params._id);
+    res.redirect('/');
 
 }
 

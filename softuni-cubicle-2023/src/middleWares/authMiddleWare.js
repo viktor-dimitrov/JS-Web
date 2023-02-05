@@ -12,6 +12,8 @@ exports.auth = async (req, res, next) => {
 
             req.user = decoded;
             req.isAuth = true;
+            res.locals.isAuth = true;
+            res.locals.user = decoded.username
 
         } catch (err) {
             console.log(err);

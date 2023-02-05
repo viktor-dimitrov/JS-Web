@@ -27,6 +27,7 @@ router.get('/edit/:_id', cubeController.editView);
 router.post('/edit/:_id', cubeController.updateCube);
 
 router.get('/delete/:_id', cubeController.deleteView);
+router.post('/delete/:_id', cubeController.deleteCube);
 
 router.get('/create/accessory',authMiddleWare.isValidToken, accessoryController.createAccessoryView );
 router.post('/create/accessory', accessoryController.addAccessory);
