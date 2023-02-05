@@ -24,17 +24,27 @@ exports.detailsView = async (req, res) => {
     res.render('details',  thisCube );
 }
 
-exports.editViw = async (req, res) => {
+exports.editView = async (req, res) => {
     const thisCube = await cubeService.getThisCube(req.params._id);
     const levelsList = cubeService.difficultyEnum.map((el) => (el.key == thisCube.difficultyLevel) ? {...el, selected: true} : el );
    
     res.render('edit', {thisCube, levelsList});
 }
 
+exports.deleteView = async (req, res) => {
+    const thisCube = await cubeService.getThisCube(req.params._id);
+
+    const difficultyLevel = cubeService.difficultyEnum.find(el => el.key == thisCube.difficultyLevel);
+    
+
+    res.render('delete', {thisCube, difficultyLevel})
+}
+
 exports.updateCube = async (req, res) => {
     const cubeId = req.params._id;
     const data = req.body;
-     await cubeService.updateThisCube(cubeId, data);
+    await cubeService.updateThisCube(cubeId, data);
     res.redirect(`/details/${cubeId}`);
 
 }
+
