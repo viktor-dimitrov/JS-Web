@@ -20,30 +20,6 @@ exports.auth = async (req, res, next) => {
 
     }
 
-
-
-
-// console.log(req)
-
-    // if(rawToken){
-       
-        // try{
-        //     const decodedToken = await verifyToken(rawToken);
-        //     console.log(decodedToken)
-
-        //     // req.user = decodedToken;
-        //     // req.validToken = true;
-
-        // }catch(err){
-
-        //     console.log(err);
-
-        //     // res.clearCookie('token ');
-        //     res.redirect('/404');
-        // }
-      
-    // }
-
    next()
 }
 

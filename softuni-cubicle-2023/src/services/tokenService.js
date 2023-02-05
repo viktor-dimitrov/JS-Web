@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 
   exports.signToken = (payload) => {
-    console.log(`000000000000000000000${payload}`)
+    
    return new Promise ((resolve, reject) => {   
       jwt.sign(payload, config.SECRET, {expiresIn: '1h'}, (err, token) => {
         if (err){
@@ -12,8 +12,6 @@ const config = require('../config');
         }
      });
     })
-
-    // return token;
 }
 
  exports.verifyToken = (rawToken) => {
@@ -26,7 +24,4 @@ const config = require('../config');
                 return resolve(decoded)
         })
     })
-
-
-
  }

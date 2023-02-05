@@ -20,9 +20,5 @@ exports.login = async (username, password) => {
      }
 
      const token = await tokenService.signToken(payload);
-
      return token
-
-
-    
 }

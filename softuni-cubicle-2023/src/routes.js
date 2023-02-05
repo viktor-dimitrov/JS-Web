@@ -16,6 +16,10 @@ router.post('/login', authentController.logUser);
 router.get('/register', authentController.registerView);
 router.post('/register', authentController.regUser);
 
+router.get('/logout', authentController.outUser );
+
+
+
 router.get('/create/cube',authMiddleWare.isValidToken, cubeController.createCubeView);
 router.post('/create/cube', cubeController.addCube);
 
