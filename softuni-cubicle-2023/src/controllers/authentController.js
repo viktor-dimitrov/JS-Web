@@ -10,8 +10,10 @@ exports.logUser = async (req, res) => {
     try{
         const token = await authentService.login(username, password);
         res.cookie('token', token);
+       
+        
     }catch(err){
-        console.log(err.message);
+        console.log(err);
     }
 
     res.redirect('/');

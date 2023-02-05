@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const signToken = require('./tokenService');
+const tokenService = require('./tokenService');
 
 
 exports.register = (username, password) => User.create({username, password});
@@ -19,7 +19,7 @@ exports.login = async (username, password) => {
         userId: user._id,
      }
 
-     const token = signToken(payload);
+     const token = await tokenService.signToken(payload);
 
      return token
 
