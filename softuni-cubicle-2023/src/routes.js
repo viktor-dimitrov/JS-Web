@@ -22,7 +22,9 @@ router.get('/create/cube',authMiddleWare.isValidToken, cubeController.createCube
 router.post('/create/cube', cubeController.addCube);
 
 router.get('/details/:_id', cubeController.detailsView);
+
 router.get('/edit/:_id', cubeController.editViw);
+router.post('/edit/:_id', cubeController.updateCube);
 
 router.get('/create/accessory',authMiddleWare.isValidToken, accessoryController.createAccessoryView );
 router.post('/create/accessory', accessoryController.addAccessory);

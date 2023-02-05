@@ -29,5 +29,12 @@ exports.editViw = async (req, res) => {
     const levelsList = cubeService.difficultyEnum.map((el) => (el.key == thisCube.difficultyLevel) ? {...el, selected: true} : el );
    
     res.render('edit', {thisCube, levelsList});
+}
+
+exports.updateCube = async (req, res) => {
+    const cubeId = req.params._id;
+    const data = req.body;
+     await cubeService.updateThisCube(cubeId, data);
+    res.redirect(`/details/${cubeId}`);
 
 }
