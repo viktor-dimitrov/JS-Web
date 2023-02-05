@@ -8,19 +8,29 @@ exports.createCubeView = (req, res) => {
 }
 
 exports.addCube = async (req, res) => {
-    let cube = new Cube(req.body);
+
+    const data = req.body;
+    data.owner = req.user.userId;
+
     try{
-        await cube.save();
+        await cubeService.createCube(data);
         res.redirect('/');
     }catch(err){
         console.log(err.message);
-        res.redirect('/404')
+         res.redirect('/404')
+
     }
+
 
 }
 
 exports.detailsView = async (req, res) => {
     const thisCube = await cubeService.getThisCube(req.params._id);
+
+    if(thisCube.owner == req.user.userId){
+        thisCube.isOwner = true;
+    }
+    // const isOwner = thisCube.owner == req.user.userId ? true : false;
     res.render('details',  thisCube );
 }
 

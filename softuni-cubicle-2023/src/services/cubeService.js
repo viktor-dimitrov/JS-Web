@@ -14,6 +14,12 @@ exports.difficultyEnum = [
 
 exports.getThisCube = (cubeId) => Cube.findById(cubeId).populate('accessories').lean();
 
+exports.createCube = async (data) => {
+    let cube = new Cube(data);
+        await cube.save();
+
+}
+
 exports.updateThisCube = (cubeId, data) => Cube.findByIdAndUpdate(cubeId, data);
 
 exports.deleteThisCube = (cubeId) => Cube.findByIdAndDelete(cubeId);
