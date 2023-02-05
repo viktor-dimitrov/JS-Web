@@ -18,12 +18,11 @@ router.post('/register', authentController.regUser);
 
 router.get('/logout', authentController.outUser );
 
-
-
 router.get('/create/cube',authMiddleWare.isValidToken, cubeController.createCubeView);
 router.post('/create/cube', cubeController.addCube);
 
 router.get('/details/:_id', cubeController.detailsView);
+router.get('/edit/:_id', cubeController.editViw);
 
 router.get('/create/accessory',authMiddleWare.isValidToken, accessoryController.createAccessoryView );
 router.post('/create/accessory', accessoryController.addAccessory);

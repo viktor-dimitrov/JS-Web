@@ -1,0 +1,22 @@
+
+        <main>
+            <h1>Edit Cube</h1>
+            <div class="form">
+                <form  method="POST">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" value="{{thisCube.name}}">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description">{{thisCube.description}}</textarea>
+                    <label for="image">ImageUrl</label>
+                    <input type="text" id="image" name="imageUrl" value="{{thisCube.imageUrl}}">
+                    <label for="difficulty">Difficulty</label>
+                    <select id="difficulty" name="difficultyLevel" />
+                    {{#each levelsList}}
+                        <option value="{{key}}" {{#if selected}}selected{{/if}}>{{key}} - {{label}}</option>
+                    {{/each}}
+                    </select>
+                    <input type="submit" value="Edit">
+                </form>
+            </div>
+        </main>
+   

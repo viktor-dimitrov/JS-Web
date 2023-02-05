@@ -1,5 +1,7 @@
 
 const Cube = require('../models/cube');
+const cubeService = require('../services/cubeService');
+
 
 exports.createCubeView = (req, res) => {
     res.render('create');
@@ -18,6 +20,14 @@ exports.addCube = async (req, res) => {
 }
 
 exports.detailsView = async (req, res) => {
-    const selectedCube = await Cube.findById(req.params._id).populate('accessories').lean();
-    res.render('details',  selectedCube );
+    const thisCube = await cubeService.getThisCube(req.params._id);
+    res.render('details',  thisCube );
+}
+
+exports.editViw = async (req, res) => {
+    const thisCube = await cubeService.getThisCube(req.params._id);
+    const levelsList = cubeService.difficultyEnum.map((el) => (el.key == thisCube.difficultyLevel) ? {...el, selected: true} : el );
+   
+    res.render('edit', {thisCube, levelsList});
+
 }
