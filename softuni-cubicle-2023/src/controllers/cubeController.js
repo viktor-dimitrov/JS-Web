@@ -27,23 +27,35 @@ exports.addCube = async (req, res) => {
 exports.detailsView = async (req, res) => {
     const thisCube = await cubeService.getThisCube(req.params._id);
 
-    if(thisCube.owner == req.user.userId){
-        thisCube.isOwner = true;
+    if(req.user){
+        if(thisCube.owner == req.user.userId){
+            thisCube.isOwner = true;
     }
-    // const isOwner = thisCube.owner == req.user.userId ? true : false;
+
+    }
+
     res.render('details',  thisCube );
 }
 
 exports.editView = async (req, res) => {
     const thisCube = await cubeService.getThisCube(req.params._id);
     const levelsList = cubeService.difficultyEnum.map((el) => (el.key == thisCube.difficultyLevel) ? {...el, selected: true} : el );
-   
+   if(req.user){
+    if(!thisCube.isOwner){
+        res.render('404');
+    }
+   }
     res.render('edit', {thisCube, levelsList});
 }
 
 exports.deleteView = async (req, res) => {
     const thisCube = await cubeService.getThisCube(req.params._id);
     const difficultyLevel = cubeService.difficultyEnum.find(el => el.key == thisCube.difficultyLevel);
+    if(req.user){
+        if(!thisCube.isOwner){
+            res.render('404');
+        }
+       }
     res.render('delete', {thisCube, difficultyLevel})
 }
 

@@ -23,3 +23,4 @@ exports.createCube = async (data) => {
 exports.updateThisCube = (cubeId, data) => Cube.findByIdAndUpdate(cubeId, data);
 
 exports.deleteThisCube = (cubeId) => Cube.findByIdAndDelete(cubeId);
+
