@@ -14,7 +14,7 @@ setupViewEngine(app);
 app.use(express.static('src/public'));
 app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
- app.use(authMiddleWare.auth);
+app.use(authMiddleWare.auth);
 app.use(router);
 
 initDb()
