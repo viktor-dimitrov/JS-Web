@@ -41,3 +41,9 @@ Multipage project Steps:
 
 7. add AuthController
 - fix html links in <nav> with correct routs
+- add register Page
+- add login Page
+
+8. add user model
+9. add authService
+ - install bcrypt & cookie-parser;
