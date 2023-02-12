@@ -1,0 +1,34 @@
+Multipage project Steps:
+
+1. Initialize project.   / npm Initi
+2. Install & setup  express / npm install express , nodemon
+    * "star": "nodemon index.js"  - script in package.json
+
+    * const app = express();
+    - app.listen(5000, () => console.log("Server is listening on port 5000....") )
+
+    * add router.js  / const router = require("express").Router();
+    - const router = require('./router');  in index.js
+
+    - add static  / app.use( '/static' , express.static('public));
+    - add body parser /app.use(express.urlencoded({extended: false}));
+    - app.use(router);
+
+3. Add view engine  / npm instal express-handlebars;  const handlebars = require('express-handlebars');
+
+  * config view engine 
+
+   - app.engine('hbs', handlebars.engine({
+     extname: 'hbs'
+     }))
+
+   - app.set('view engine', 'hbs');
+
+4. Create folders - views/layouts/main.hbs ; views/partilas ; views/home/index. ;
+-  {{{body}}}  in main layout
+-  add css in public folder
+
+
+5. Add controllers to router
+
+- const homeController = require('./controllers/homeController');  in router.js;
