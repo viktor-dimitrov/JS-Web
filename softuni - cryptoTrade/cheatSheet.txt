@@ -24,7 +24,7 @@ Multipage project Steps:
 
    - app.set('view engine', 'hbs');
 
-4. Create folders - views/layouts/main.hbs ; views/partilas ; views/home/index. ;
+4. Create folders - views/layouts/main.hbs ; views/partilas ; views/home/index.hbs ;
 -  {{{body}}}  in main layout
 -  add css in public folder
 
@@ -32,3 +32,12 @@ Multipage project Steps:
 5. Add controllers to router
 
 - const homeController = require('./controllers/homeController');  in router.js;
+
+6. Configure Database / npm install mongoose ; const mongoose = require('mongoose'); mongoose.set('strictQuery', false);
+
+- mongoose.connect('mongodb://127.0.0.1:27017/crypto')
+.then(() => app.listen(5000, () => console.log("Database is loaded and Server is listening on port 5000....") ))
+.catch((error) => console.log(error)) 
+
+7. add AuthController
+- fix html links in <nav> with correct routs
