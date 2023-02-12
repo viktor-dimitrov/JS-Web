@@ -2,6 +2,7 @@ const express = require('express');
 const router = require('./router');
 const handlebars = require('express-handlebars');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 mongoose.set('strictQuery', false);
 
@@ -18,6 +19,7 @@ app.set('view engine', 'hbs');
 app.use( '/static', express.static('public'));
 // app.use(express.urlencoded({extended: false})) -  parse url in object and can get him with req.body
 app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
 
 app.use(router);
 
