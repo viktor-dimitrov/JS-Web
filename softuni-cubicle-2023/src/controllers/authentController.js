@@ -29,8 +29,6 @@ exports.logUser = async (req, res) => {
 exports.regUser = async (req, res) => {
     const {username, password, repeatPassword} = req.body;
 
-   
-
     if ( password !== repeatPassword) {
         const error = new Error ("Invalid password comfirmation!");
         return res.render('register', {error})
