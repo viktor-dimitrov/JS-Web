@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validators = require('mongoose-validators');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
@@ -6,8 +7,9 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        minLenght: 5,
+        minLength: 5,
         unique: true,
+        validate:  validators.isAlphanumeric({message:'Username should consist only of English letters and digits'}),
        
         
     },
@@ -15,7 +17,8 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLenght: 8,
+        minLength: 8,
+        validate: validators.isAlphanumeric({message:'Username should consist only of English letters and digits'}),
 
     }
 

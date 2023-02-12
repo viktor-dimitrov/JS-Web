@@ -29,22 +29,20 @@ exports.logUser = async (req, res) => {
 exports.regUser = async (req, res) => {
     const {username, password, repeatPassword} = req.body;
 
+   
+
     if ( password !== repeatPassword) {
-        return res.status(404).end();
+        const error = new Error ("Invalid password comfirmation!");
+        return res.render('register', {error})
     }
 
     try{
-        await authentService.getUser(username);
+      const existing = await authentService.getUser(username);
+      const user = await authentService.register(username, password);
     }catch(error){
-        res.render('register', {error})
+      
+      return  res.render('register', { error })
     }
-    // const userExist = 
-
-    // if(userExist){
-
-    //     return res.render('register');
-    // }
-    const user = await authentService.register(username, password);
 
     res.redirect('/');
     
