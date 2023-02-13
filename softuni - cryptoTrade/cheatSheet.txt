@@ -55,4 +55,6 @@ Steps:
 16. Dynamic navBar
 - add conditions in main layout /  <nav> {{#if isAuth}}   {{else}}  {{/if}}
 
+17. Notifications & errorHandling
+
  

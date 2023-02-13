@@ -7,6 +7,7 @@ const { SECRET } = require('../lib/constants');
 exports.getUser = (email) => User.findOne({email});
 
 exports.regUser = async (username, email, password, repassword) => {
+   
     const user = await this.getUser(email);
     
     if(user){
@@ -19,8 +20,15 @@ exports.regUser = async (username, email, password, repassword) => {
         throw new Error('The password should be at least four characters long')
     }
 
-    const hashPass = await bcrypt.hash(password, 5);
-    User.create({username, email, password: hashPass});
+    try{
+        const hashPass = await bcrypt.hash(password, 5);
+        await User.create({username, email, password: hashPass});
+    }catch(error){
+       throw new Error((error.message).split(':')[2].split(',')[0])
+    }
+       
+   
+  
 }
 
 exports.logUser = async (email, password) => {

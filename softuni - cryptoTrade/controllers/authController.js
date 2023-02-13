@@ -10,10 +10,9 @@ exports.postLogin = async (req, res) => {
     try{
       const token = await authService.logUser(email, password);
       res.cookie('auth', token);
-      console.log(token);
       res.redirect('/');
     }catch(error){
-        console.log(error);
+        return res.status(400).render('auth/login', {error});
     }
 }
 
@@ -27,7 +26,8 @@ exports.postRegister = async (req, res) => {
         await authService.regUser(username, email, password, repassword);
         res.redirect('/');
     }catch(error){
-        console.log(error)
+
+         return res.status(400).render('auth/register', {error})
     }
 }
 

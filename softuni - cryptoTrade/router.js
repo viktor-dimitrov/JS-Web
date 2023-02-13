@@ -14,4 +14,6 @@ router.post('/login', authController.postLogin);
 router.get('/register', authController.getRegisterPage);
 router.post('/register', authController.postRegister);
 
+router.get('/*', homeController.getNotFoudPage);
+
 module.exports = router;
