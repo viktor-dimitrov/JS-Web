@@ -13,8 +13,10 @@ exports.postCreate = async (req, res) => {
 
     try{
         await cryptoService.createCrypto(data);
+        res.redirect('/catalog');
     }catch(error){
         console.log(error)
+        return res.status(400).render('crypto/create', {error})
     }
    
 }

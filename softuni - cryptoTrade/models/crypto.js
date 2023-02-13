@@ -3,23 +3,33 @@ const mongoose = require('mongoose');
 const cryptoSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required']
+        required: [true, 'Name is required'],
+        minLength: [2, 'The Name should be at least two characters']
     },
     image: {
         type: String,
-        required: [true, 'Image URL is required']
+        required: [true, 'Image URL is required'],
+        validate:{
+            validator: function(value) {
+                return value.startsWith('http://') || value.startsWith('https://')
+            },
+            message: 'Invalid Image URL'
+        },
     },
     price: {
         type: Number,
-        required: [true, 'Price is required']
+        required: [true, 'Price is required'],
+        min: [0, 'The Price should be a positive number']
     },
     description: {
         type: String,
-        required: [true, 'Description is required']
+        required: [true, 'Description is required'],
+        minLength: [10, 'The Description should be a minimum of 10 characters long']
     },
     payment: {
         type: String,
         required: [true, 'Payment method is required']
+        //TODO: validation fo methods
     },
     owner: {
         type: mongoose.Types.ObjectId,
@@ -33,6 +43,8 @@ const cryptoSchema = new mongoose.Schema({
 })
 
 const Crypto = mongoose.model('Crypto', cryptoSchema);
+
+module.exports = Crypto;
 
 
 
