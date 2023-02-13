@@ -29,6 +29,9 @@ exports.postRegister = async (req, res) => {
     }catch(error){
         console.log(error)
     }
+}
 
-
+exports.getLogout = (req, res) => {
+    res.clearCookie('auth');
+    res.redirect('/');
 }

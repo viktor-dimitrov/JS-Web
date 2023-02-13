@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
-const SECRET = 'SoftUniSecret';
+const { SECRET } = require('../lib/constants');
+
 
 exports.getUser = (email) => User.findOne({email});
 
@@ -44,7 +45,6 @@ exports.logUser = async (email, password) => {
     const token = await jwt.sign(payload, SECRET);
 
     return token;
-
-
 }
+
 

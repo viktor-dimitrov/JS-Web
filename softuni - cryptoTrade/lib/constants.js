@@ -1,0 +1,3 @@
+
+
+exports.SECRET = 'SoftUniSecret';

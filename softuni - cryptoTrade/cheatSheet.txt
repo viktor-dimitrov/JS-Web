@@ -1,57 +1,40 @@
-Multipage project Steps:
-
+Scelleton for Multipage app
+Steps:
 1. Initialize project.   / npm Initi
 2. Install & setup  express / npm install express , nodemon
     * "star": "nodemon index.js"  - script in package.json
-
     * const app = express();
     - app.listen(5000, () => console.log("Server is listening on port 5000....") )
-
     * add router.js  / const router = require("express").Router();
     - const router = require('./router');  in index.js
-
     - add static  / app.use( '/static' , express.static('public));
     - add body parser /app.use(express.urlencoded({extended: false}));
     - app.use(router);
-
 3. Add view engine  / npm instal express-handlebars;  const handlebars = require('express-handlebars');
-
   * config view engine 
-
    - app.engine('hbs', handlebars.engine({
      extname: 'hbs'
      }))
-
    - app.set('view engine', 'hbs');
-
 4. Create folders - views/layouts/main.hbs ; views/partilas ; views/home/index.hbs ;
 -  {{{body}}}  in main layout
 -  add css in public folder
-
-
 5. Add controllers to router
-
 - const homeController = require('./controllers/homeController');  in router.js;
-
 6. Configure Database / npm install mongoose ; const mongoose = require('mongoose'); mongoose.set('strictQuery', false);
-
 - mongoose.connect('mongodb://127.0.0.1:27017/crypto')
 .then(() => app.listen(5000, () => console.log("Database is loaded and Server is listening on port 5000....") ))
 .catch((error) => console.log(error)) 
-
 7. add AuthController
 - fix html links in <nav> with correct routs
 - add register Page
 - add login Page
-
 8. add user model
 9. add authService
  - install bcrypt & cookie-parser;
-
 10. Register user
  - check if user exist
  - check if password is valid
-
 11. Login user
  - check if user exist
  - check if pasword is valid /  const passIsValid =  await bcrypt.compare(password, user.password);
@@ -59,4 +42,14 @@ Multipage project Steps:
  - Use util.promisify / const util = require('util') ; exports.sign = util.promisify(jwt.sign); ,<- .verify too;
  - generate token with and return it / const token = await jwt.sign(payload, SECRET, ?{expiration}?));
  - Push token in cookie response  /  res.cookie('auth', token);
-13. Add authentication midlleware
+13. Add authentication middleware /exports.authentication = async (req, res, next) =>
+- get token from client /  const token = req.cookies['auth'];
+- if client has token , decode token else next() /  const decodedToken = await jwt.verify(token, SECRET);
+- set req.user = decodetToken
+- add authentication middleware , after cookieParser , but before router  / app.use(authentication);
+14. Logout  / res.clearCookie('auth');
+15. Authorization middleware  / exports.isAuth = (req, res, next) => {if(!req.user){return res.redirect('/login')}  , else next();}
+ - import isAuth in router and use in routes, where is needed;
+ 
+
+ 
