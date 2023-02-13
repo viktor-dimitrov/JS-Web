@@ -1,7 +1,9 @@
 const cryptoService = require('../services/cryptoService')
 
-exports.getCatalogPage = (req, res) => {
-    res.render('crypto/catalog');
+exports.getCatalogPage = async (req, res) => {
+    const allCrypto = await cryptoService.getAll();
+    console.log(allCrypto)
+    res.render('crypto/catalog', {allCrypto});
 }
 
 exports.getCreatePage = (req, res) => {

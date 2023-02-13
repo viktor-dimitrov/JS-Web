@@ -1,15 +1,14 @@
 const Crypto = require('../models/crypto');
 
-exports.createCrypto = async(data) => {
+exports.getAll = async () => await Crypto.find().lean();
 
-    console.log(data)
+exports.createCrypto = async(data) => {
 
     try{
         await Crypto.create(data)
     }catch(error){
         console.log(error);
-        // throw new Error((error.message).split(':')[2].split(',')[0])
+         throw new Error((error.message).split(':')[2].split(',')[0])
     }
-
-   
 }
+
