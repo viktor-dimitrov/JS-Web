@@ -8,9 +8,12 @@ exports.postLogin = async (req, res) => {
     const {email, password} = req.body;
     
     try{
-
+      const token = await authService.logUser(email, password);
+      res.cookie('auth', token);
+      console.log(token);
+      res.redirect('/');
     }catch(error){
-        
+        console.log(error);
     }
 }
 

@@ -47,3 +47,16 @@ Multipage project Steps:
 8. add user model
 9. add authService
  - install bcrypt & cookie-parser;
+
+10. Register user
+ - check if user exist
+ - check if password is valid
+
+11. Login user
+ - check if user exist
+ - check if pasword is valid /  const passIsValid =  await bcrypt.compare(password, user.password);
+12. Generate token
+ - Use util.promisify / const util = require('util') ; exports.sign = util.promisify(jwt.sign); ,<- .verify too;
+ - generate token with and return it / const token = await jwt.sign(payload, SECRET, ?{expiration}?));
+ - Push token in cookie response  /  res.cookie('auth', token);
+13. Add authentication midlleware
