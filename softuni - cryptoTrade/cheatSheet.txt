@@ -46,10 +46,13 @@ Steps:
 - get token from client /  const token = req.cookies['auth'];
 - if client has token , decode token else next() /  const decodedToken = await jwt.verify(token, SECRET);
 - set req.user = decodetToken
+- set res.locals.isAuth = true; (use in main layout fo dynamic navbar)
+- set res.locals.user = decodedToken;
 - add authentication middleware , after cookieParser , but before router  / app.use(authentication);
 14. Logout  / res.clearCookie('auth');
 15. Authorization middleware  / exports.isAuth = (req, res, next) => {if(!req.user){return res.redirect('/login')}  , else next();}
  - import isAuth in router and use in routes, where is needed;
- 
+16. Dynamic navBar
+- add conditions in main layout /  <nav> {{#if isAuth}}   {{else}}  {{/if}}
 
  
