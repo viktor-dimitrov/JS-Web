@@ -2,8 +2,9 @@ const Crypto = require('../models/crypto');
 
 exports.getAll = async () => await Crypto.find().lean();
 
-exports.createCrypto = async(data) => {
+exports.getOne = async (id) => await Crypto.findById(id).lean();
 
+exports.createCrypto = async(data) => {
     try{
         await Crypto.create(data)
     }catch(error){

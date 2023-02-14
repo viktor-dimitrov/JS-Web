@@ -1,9 +1,14 @@
 const cryptoService = require('../services/cryptoService')
 
 exports.getCatalogPage = async (req, res) => {
-    const allCrypto = await cryptoService.getAll();
-    console.log(allCrypto)
-    res.render('crypto/catalog', {allCrypto});
+
+    try{
+        const allCrypto = await cryptoService.getAll();
+        res.render('crypto/catalog', {allCrypto});
+    }catch(error){
+        res.redirect('/404');
+    }
+
 }
 
 exports.getCreatePage = (req, res) => {
@@ -23,8 +28,16 @@ exports.postCreate = async (req, res) => {
    
 }
 
-exports.getDetailsPage = (req, res) => {
-    res.render('crypto/details');
+exports.getDetailsPage = async (req, res) => {
+    const cryptoId = req.params._id;
+    try{
+        const currentCrypto = await cryptoService.getOne(cryptoId);
+        const isOwner = (req.user?._id == currentCrypto.owner);
+        res.render('crypto/details', {currentCrypto, isOwner});
+    }catch(error){
+
+    }
+    
 }
 
 exports.getEditPage = (req, res) => {
