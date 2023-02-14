@@ -19,10 +19,16 @@
                     {{#if isAuth}}
 
                     {{#if isOwner}}
+                    <div class="author">
                         <a href="/edit/{{currentCrypto._id}}" class="btn-edit">Edit</a>
                         <a href="/delete/{{currentCrypto._id}}" class="btn-delete">Delete</a>
+                    </div>
                         {{else}}
-                        <a href="/buy/{{currentCrypto._id}}" class="btn-buy">Buy</a>
+                        {{#if isTrader}}
+                            <p class="buy-message">You already bought these crypto coins.</p>
+                        {{else}}
+                           <a href="/buy/{{currentCrypto._id}}" class="btn-buy">Buy</a>
+                        {{/if}}
                     {{/if}}
 
                     {{/if}}
@@ -36,7 +42,7 @@
                     <!-- <a href="#" class="btn-buy">Buy</a> -->
                     
                     <!-- Logged in user who has already buy this crypto-->
-                    <p class="buy-message">You already bought these crypto coins.</p>
+                    
                 </div>
             </div>
         </section>

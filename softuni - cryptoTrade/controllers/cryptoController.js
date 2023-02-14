@@ -34,7 +34,8 @@ exports.getDetailsPage = async (req, res) => {
     try{
         const currentCrypto = await cryptoService.getOne(req.params._id);
         const isOwner = (req.user?._id == currentCrypto.owner);
-        res.render('crypto/details', {currentCrypto, isOwner});
+        const isTrader = Object.values(currentCrypto.traders).some(id => id == req.user?._id);
+        res.render('crypto/details', {currentCrypto, isOwner, isTrader});
     }catch(error){
         res.redirect('/404');
     }
@@ -72,8 +73,15 @@ exports.getDelete = async (req, res) => {
     }
 }
 
+exports.buyCrypto = async (req, res) => {
+    try {
+        await Crypto.findByIdAndUpdate(req.params._id, {$push: {traders: req.user._id}});
+        res.redirect(`/details/${req.params._id}`);
+    } catch (error) {
+        res.redirect('/404');
+    }
 
-
+}
 
 exports.getSearchPage = (req, res) => {
     res.render('crypto/search');
