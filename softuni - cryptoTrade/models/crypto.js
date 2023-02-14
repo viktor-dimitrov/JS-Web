@@ -28,8 +28,12 @@ const cryptoSchema = new mongoose.Schema({
     },
     payment: {
         type: String,
-        required: [true, 'Payment method is required']
-        //TODO: validation fo methods
+        required: [true, 'Payment method is required'],
+        enum: {
+            values: ['crypto-wallet', 'credit-card', 'debit-card', 'paypal'],
+            message: ['Invalid payment method']
+        }
+        
     },
     owner: {
         type: mongoose.Types.ObjectId,

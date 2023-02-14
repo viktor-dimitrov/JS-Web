@@ -17,7 +17,9 @@ router.post('/register', authController.postRegister);
 
 router.get('/catalog', cryptoController.getCatalogPage);
 
-router.get('/details/:_id', cryptoController.getDetailsPage)
+router.get('/details/:_id', cryptoController.getDetailsPage);
+router.get('/edit/:_id', cryptoController.getEditPage);
+router.post('/edit/:_id', cryptoController.postEdit);
 
 router.get('/create', cryptoController.getCreatePage);
 router.post('/create', cryptoController.postCreate);

@@ -1,4 +1,5 @@
 const cryptoService = require('../services/cryptoService')
+const  { paymentMethodsMap } = require('../lib/constants');
 
 exports.getCatalogPage = async (req, res) => {
 
@@ -22,16 +23,16 @@ exports.postCreate = async (req, res) => {
         await cryptoService.createCrypto(data);
         res.redirect('/catalog');
     }catch(error){
-        console.log(error)
+       
         return res.status(400).render('crypto/create', {error})
     }
    
 }
 
 exports.getDetailsPage = async (req, res) => {
-    const cryptoId = req.params._id;
+    // const cryptoId = req.params._id;
     try{
-        const currentCrypto = await cryptoService.getOne(cryptoId);
+        const currentCrypto = await cryptoService.getOne(req.params._id);
         const isOwner = (req.user?._id == currentCrypto.owner);
         res.render('crypto/details', {currentCrypto, isOwner});
     }catch(error){
@@ -40,8 +41,26 @@ exports.getDetailsPage = async (req, res) => {
     
 }
 
-exports.getEditPage = (req, res) => {
-    res.render('crypto/edit');
+exports.getEditPage = async(req, res) => {
+   try{
+    const currentCrypto = await cryptoService.getOne(req.params._id);
+    const paymentMethods = paymentMethodsMap.map((el) => (el.key == currentCrypto.payment) ? {...el, selected: true} : el );
+    res.render('crypto/edit', {currentCrypto, paymentMethods});
+   }catch(error){
+
+   }
+}
+
+exports.postEdit = async (req, res) => {
+    const data = req.body;
+    const cryptoId = req.params._id
+
+    try{
+        const currentCrypto = await cryptoService.updateCrypto(cryptoId, data);
+        res.redirect(`/details/${cryptoId}`);
+    }catch(error){
+
+    }
 }
 
 exports.getSearchPage = (req, res) => {

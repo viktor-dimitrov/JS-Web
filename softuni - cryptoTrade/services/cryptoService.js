@@ -13,3 +13,5 @@ exports.createCrypto = async(data) => {
     }
 }
 
+exports.updateCrypto = async (cryptoId, data) => await Crypto.findByIdAndUpdate(cryptoId, data);
+
