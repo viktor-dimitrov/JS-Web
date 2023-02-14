@@ -44,13 +44,13 @@ exports.getDetailsPage = async (req, res) => {
 exports.getEditPage = async(req, res) => {
    try{
     const currentCrypto = await cryptoService.getOne(req.params._id);
-
     const paymentMethods = payService.payMethods(currentCrypto);
+    if(currentCrypto.owner != req.user?._id) {
+        res.redirect('/404')
+    }
 
-    
     res.render('crypto/edit', {currentCrypto, paymentMethods});
    }catch(error){
-
     console.log(error)
     res.redirect('/404');
    }
@@ -70,6 +70,7 @@ exports.postEdit = async (req, res) => {
 }
 
 exports.getDelete = async (req, res) => {
+
     try{
         await Crypto.findByIdAndDelete(req.params._id);
         res.redirect('/catalog');

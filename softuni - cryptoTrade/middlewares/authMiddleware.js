@@ -14,7 +14,8 @@ exports.authentication = async (req, res, next) => {
 
         }catch(error) {
              res.clearCookie('auth');
-            console.log('Unauthorized User OOOOOOOOOOOOOOOOOOOOOOOOO')
+            console.log('Unauthorized User OOOOOOOOOOOOOOOOOOOOOOOOO');
+            // res.redirect('/404')
         }
     }
     next();
