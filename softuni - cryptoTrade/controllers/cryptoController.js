@@ -47,19 +47,21 @@ exports.getEditPage = async(req, res) => {
     const paymentMethods = paymentMethodsMap.map((el) => (el.key == currentCrypto.payment) ? {...el, selected: true} : el );
     res.render('crypto/edit', {currentCrypto, paymentMethods});
    }catch(error){
-
+    
    }
 }
 
 exports.postEdit = async (req, res) => {
     const data = req.body;
-    const cryptoId = req.params._id
+    const cryptoId = req.params._id;
+    const currentCrypto = data;
+    const paymentMethods = paymentMethodsMap.map((el) => (el.key == currentCrypto.payment) ? {...el, selected: true} : el );
 
     try{
-        const currentCrypto = await cryptoService.updateCrypto(cryptoId, data);
+       await cryptoService.updateCrypto(cryptoId, data);
         res.redirect(`/details/${cryptoId}`);
     }catch(error){
-
+        return res.status(400).render('crypto/edit', {currentCrypto, paymentMethods, error})
     }
 }
 

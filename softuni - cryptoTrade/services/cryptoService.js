@@ -8,10 +8,18 @@ exports.createCrypto = async(data) => {
     try{
         await Crypto.create(data)
     }catch(error){
-        console.log(error);
-         throw new Error((error.message).split(':')[2].split(',')[0])
+        throw new Error((error.message).split(':')[2].split(',')[0])
     }
 }
 
-exports.updateCrypto = async (cryptoId, data) => await Crypto.findByIdAndUpdate(cryptoId, data);
+exports.updateCrypto = async (cryptoId, data) => {
 
+    try{
+        await Crypto.findByIdAndUpdate(cryptoId, data, {runValidators: true});
+    }catch(error){
+        console.log(error);
+         throw new Error((error.message).split(':')[2].split(',')[0])
+    }
+   
+
+}
