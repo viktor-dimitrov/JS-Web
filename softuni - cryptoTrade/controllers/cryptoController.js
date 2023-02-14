@@ -1,7 +1,6 @@
 const cryptoService = require('../services/cryptoService');
 const Crypto = require('../models/crypto');
-const  { paymentMethodsMap } = require('../lib/constants');
-
+const payService = require('../services/payService')
 exports.getCatalogPage = async (req, res) => {
 
     try{
@@ -25,7 +24,7 @@ exports.postCreate = async (req, res) => {
         res.redirect('/catalog');
     }catch(error){
        
-        return res.status(400).render('crypto/create', {error})
+        return res.status(400).render('crypto/create', {data, error})
     }
    
 }
@@ -45,18 +44,24 @@ exports.getDetailsPage = async (req, res) => {
 exports.getEditPage = async(req, res) => {
    try{
     const currentCrypto = await cryptoService.getOne(req.params._id);
-    const paymentMethods = paymentMethodsMap.map((el) => (el.key == currentCrypto.payment) ? {...el, selected: true} : el );
+
+    const paymentMethods = payService.payMethods(currentCrypto);
+
+    
     res.render('crypto/edit', {currentCrypto, paymentMethods});
    }catch(error){
+
+    console.log(error)
     res.redirect('/404');
    }
 }
 exports.postEdit = async (req, res) => {
     const currentCrypto = req.body;
     const cryptoId = req.params._id;
-    const paymentMethods = paymentMethodsMap.map((el) => (el.key == currentCrypto.payment) ? {...el, selected: true} : el );
+    const paymentMethods =  payService.payMethods(currentCrypto);
 
     try{
+       
        await cryptoService.updateCrypto(cryptoId, currentCrypto);
         res.redirect(`/details/${cryptoId}`);
     }catch(error){
@@ -69,6 +74,7 @@ exports.getDelete = async (req, res) => {
         await Crypto.findByIdAndDelete(req.params._id);
         res.redirect('/catalog');
     }catch(error){
+        console.log(error)
         res.redirect('/404');
     }
 }
@@ -83,6 +89,14 @@ exports.buyCrypto = async (req, res) => {
 
 }
 
-exports.getSearchPage = (req, res) => {
-    res.render('crypto/search');
+exports.getSearchPage = async (req, res) => {
+    const {text, payment} = req.query
+    
+    try{
+        const allCrypto = await cryptoService.searchCrypto(text, payment);
+        res.render('crypto/search', {allCrypto, text, payment});
+    }catch(error){
+        res.redirect('/404');
+    }
+
 }

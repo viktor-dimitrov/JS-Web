@@ -15,13 +15,13 @@
                 <h4>Post your coins to sell</h4>
                 <form  method="POST">
                     <label>Name:</label>
-                    <input type="text" id="name" name="name" placeholder="Bitcoin">
+                    <input type="text" id="name" name="name" placeholder="Bitcoin" {{#if data}}value="{{data.name}}" {{/if}}>
                     <label>Image:</label>
-                    <input type="text" id="image" name="image" placeholder="http://...">
+                    <input type="text" id="image" name="image" placeholder="http://..."{{#if data}} value="{{data.image}}"{{/if}}>
                     <label>Price:</label>
-                    <input type="number" id="price" name="price" placeholder="31,166.71">
+                    <input type="number" id="price" name="price" placeholder="31,166.71"{{#if data}}value ="{{data.price}}" {{/if}}>
                     <label>Description:</label>
-                    <textarea id="description" name="description" placeholder="Introduce your coins..."></textarea>
+                    <textarea id="description" name="description" placeholder="Introduce your coins...">{{#if data}}{{data.description}}{{/if}}</textarea>
                     <label>Payment method:</label>
                     <select id="payment" name="payment">
                         <option value="crypto-wallet">Crypto Wallet</option>
