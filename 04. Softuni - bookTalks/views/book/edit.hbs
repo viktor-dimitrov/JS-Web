@@ -1,0 +1,29 @@
+
+    {{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error.message}}</p>
+        </div>
+    </div>
+    {{/if}}
+
+    <section class="edit-form-container">
+
+        <form method="POST">
+            <h3>Edit Book Review</h3>
+            <label>Title</label>
+            <input type="text" name="title" class="box" value="{{currentBook.title}}" id="">
+            <label>Author</label>
+            <input type="text" name="author" class="box" value="{{currentBook.author}}" id="">
+            <label>Genre</label>
+            <input type="text" name="genre" class="box" value="{{currentBook.genre}}" id="">
+            <label>Stars</label>
+            <input type="number" name="stars" class="box" value="{{currentBook.stars}}" id="">
+            <label>Image</label>
+            <input type="text" name="iamge" class="box" value="{{currentBook.image}}" id="">
+            <label>Review</label>
+            <textarea class="box"
+                name="review">{{currentBook.review}}</textarea>
+            <input type="submit" value="Edit" class="btn">
+        </form>
+    </section>

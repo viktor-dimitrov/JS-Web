@@ -18,13 +18,15 @@ router.post('/register', authController.postRegister);
 router.get('/catalog', bookController.getCatalogPage);
 router.get('/details/:_id', bookController.getDetailsPage);
 
+router.get('/wish/:_id', bookController.getWish);
+
 router.get('/create', isAuth, bookController.getCreatePage);
 router.post('/create', isAuth, bookController.postCreate);
 
+router.get('/edit/:_id', isAuth, bookController.getEditPage);
+router.post('/edit/:_id', isAuth, bookController.postEdit);
 
 
-
-console.log('Route not Found')
 router.get('/*', homeController.getNotFoudPage);
 
 module.exports = router;
