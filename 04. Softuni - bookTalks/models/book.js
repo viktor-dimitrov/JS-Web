@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, 'Username is required'],
-        minLength:[ 4, 'Username should be at least four characters long']
+        required: [true, 'Title is required'],
+        // minLength:[ 4, 'Username should be at least four characters long']
     },
     author: {
         type: String,
-        required: [true,'Email is required'],
+        required: [true,'Author is required'],
     
     },
     image: {

@@ -15,8 +15,13 @@ router.post('/login', authController.postLogin);
 router.get('/register', authController.getRegisterPage);
 router.post('/register', authController.postRegister);
 
+router.get('/catalog', bookController.getAll);
+router.get('/details/:_id', bookController.getOne);
+
 router.get('/create', isAuth, bookController.getCreatePage);
 router.post('/create', isAuth, bookController.postCreate);
+
+
 
 
 console.log('Route not Found')
