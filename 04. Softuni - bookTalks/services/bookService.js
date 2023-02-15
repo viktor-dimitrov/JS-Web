@@ -22,4 +22,14 @@ exports.editBook = async (bookId, data) => {
         throw new Error((error.message).split(':')[2].split(',')[0]);
     }
 }
+
+exports.delBook = async (bookId) => {
+
+    try{
+        await Book.findByIdAndDelete(bookId);
+    }catch(error){
+        throw new Error((error.message).split(':')[2].split(',')[0])
+    }
+    
+}
  

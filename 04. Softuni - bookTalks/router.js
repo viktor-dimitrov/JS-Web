@@ -2,7 +2,7 @@ const router = require('express').Router();
 const homeController = require('./controllers/homeController');
 const authController = require('./controllers/authController');
 const bookController = require('./controllers/bookController');
-const { isAuth } = require('./middlewares/authMiddleware');
+const { isAuth, isOwner } = require('./middlewares/authMiddleware');
 
 
 
@@ -23,8 +23,9 @@ router.get('/wish/:_id', bookController.getWish);
 router.get('/create', isAuth, bookController.getCreatePage);
 router.post('/create', isAuth, bookController.postCreate);
 
-router.get('/edit/:_id', isAuth, bookController.getEditPage);
-router.post('/edit/:_id', isAuth, bookController.postEdit);
+router.get('/edit/:_id/:_owner', isAuth, isOwner, bookController.getEditPage);
+router.post('/edit/:_id/:_owner', isAuth, isOwner, bookController.postEdit);
+router.get('/delete/:_id/:_owner', isAuth, isOwner, bookController.getDelete);
 
 
 router.get('/*', homeController.getNotFoudPage);

@@ -8,13 +8,21 @@ exports.getCatalogPage = async (req, res) => {
 }
 
 exports.getDetailsPage = async (req, res) => {
-    const currentBook = await bookService.getOne(req.params._id);
-    
-    const isOwner = (currentBook.owner == req.user?._id) ? true : false;
 
-    const isWished = (currentBook.wishingList.some(id => id == req.user?._id))
+    try{
+        const currentBook = await bookService.getOne(req.params._id);
+
+      
     
-    res.render('book/details', {currentBook, isOwner, isWished});
+        const isOwner = (currentBook.owner == req.user?._id) ? true : false;
+    
+        const isWished = (currentBook.wishingList.some(id => id == req.user?._id))
+        
+        res.render('book/details', {currentBook, isOwner, isWished});
+    }catch(error){
+        console.log(error);
+    }
+
 }
 
 exports.getCreatePage = (req, res) => {
@@ -46,17 +54,27 @@ exports.getEditPage = async (req, res) => {
 exports.postEdit = async(req, res) => {
     const data = req.body;
     const bookId = req.params._id;
-
     try{
         await bookService.editBook(bookId, data);
         res.redirect(`/details/${bookId}`);
     }catch(error){
         console.log(error);
-        return res.status(400). render('book/edit', {currentBook:data, error});
+        return res.status(400).render('book/edit', {currentBook: data, error});
     }
 }
 
+exports.getDelete = async(req, res) => {
+    console.log(req.params._id)
 
+    try{
+        await bookService.delBook(req.params._id);
+        res.redirect('/catalog');
+    }catch(error){
+        console.log(error); 
+        return res.status(400).render('home/404');
+    }
+
+}
 
 exports.getWish = async (req, res) => {
     const bookId = req.params._id;

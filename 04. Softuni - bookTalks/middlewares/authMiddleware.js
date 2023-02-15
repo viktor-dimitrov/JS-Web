@@ -28,3 +28,12 @@ exports.isAuth = (req, res, next) => {
 
     next();
 }
+
+exports.isOwner = (req, res, next) => {
+    console.log(req.user._id)
+    console.log(req.params._id)
+    if(req.user._id != req.params._owner){
+        return res.redirect('home/404');
+    }
+    next();
+}
