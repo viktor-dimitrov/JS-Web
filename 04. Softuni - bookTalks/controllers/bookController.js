@@ -2,13 +2,15 @@
 const bookService = require('../services/bookService');
 
 
-exports.getAll = async (req, res) => {
+exports.getCatalogPage = async (req, res) => {
     const allBooks = await bookService.getAll();
     res.render('book/catalog', {allBooks})
 }
 
-exports.getOne = async (req, res) => {
-    const currentBook = await bookService(req.params._id)
+exports.getDetailsPage = async (req, res) => {
+    const currentBook = await bookService.getOne(req.params._id);
+    const isOwner = (currentBook.owner == req.user?._id) ? true : false;
+    res.render('book/details', {currentBook, isOwner});
 }
 
 exports.getCreatePage = (req, res) => {
@@ -19,11 +21,8 @@ exports.postCreate = async (req, res) => {
     data.owner = req.user._id;
 
     try{
-
         await bookService.craeteBook(data);
-//TODO: redirect to catalog page 
-        res.redirect('/')
-        
+        res.redirect('/catalog')
     }catch(error){
         console.log(error);
         return res.status(400).render('book/create', {error});
