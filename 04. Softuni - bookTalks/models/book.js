@@ -4,27 +4,36 @@ const bookSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Title is required'],
-        // minLength:[ 4, 'Username should be at least four characters long']
+        minLength:[ 2, 'Title should be at least two characters long']
     },
     author: {
         type: String,
         required: [true,'Author is required'],
+        minLength:[ 5, 'Author should be at least five characters long']
     
     },
     image: {
         type: String,
-        required: true,
+        required:[ true, 'Image URL is required'],
+        validate:{
+            validator: function(value) {
+                return value.startsWith('http://') || value.startsWith('https://')
+            },
+            message: 'Invalid Image URL'
+        }
     },
     review: {
         type: String,
         required: true,
+        minLength:[ 10, 'Genre should be at least ten characters long']
     },
     genre: {
         type: String,
+        minLength:[ 3, 'Genre should be at least three characters long']
     },
     stars:{ 
         type: Number,
-        required: true,
+        required: [true, 'Stars is required'],
         min: 1,
         max: 5
     },
