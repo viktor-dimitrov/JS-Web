@@ -1,10 +1,11 @@
 const User = require('../models/user');
+const Book = require('../models/book')
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonwebtoken');
 const { SECRET } = require('../lib/constants');
 
 
-exports.getUser = (email) => User.findOne({email});
+exports.getUser = (email) => User.findOne({email}).populate('wishes').lean();
 
 exports.regUser = async (username, email, password, repassword) => {
    

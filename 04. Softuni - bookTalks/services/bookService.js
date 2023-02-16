@@ -1,4 +1,5 @@
 const Book = require('../models/book');
+const User = require('../models/user')
 
 
 exports.getAll = async () => await Book.find().lean();
@@ -13,7 +14,19 @@ exports.craeteBook = async (data) => {
     }
 }
 
-exports.wishBook = async (bookId, userId) => await Book.findByIdAndUpdate(bookId, {$push: {wishingList: userId}});
+exports.wishBook = async (bookId, userId) => {
+    try{
+        await Book.findByIdAndUpdate(bookId, {$push: {wishingList: userId}});
+        await User.findByIdAndUpdate(userId, {$push: {wishes: bookId}})
+    }catch(error){
+        throw new Error((error.message).split(':')[2].split(',')[0]);
+    }
+
+
+}
+
+
+
 
 exports.editBook = async (bookId, data) => {
     try{

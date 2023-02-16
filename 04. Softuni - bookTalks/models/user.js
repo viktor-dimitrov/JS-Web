@@ -15,7 +15,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minLength: 3,
-    }
+    },
+    wishes: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'book'
+    }]
 
 });
 

@@ -87,3 +87,4 @@ exports.getWish = async (req, res) => {
         res.redirect('/404');
     }
 }
+

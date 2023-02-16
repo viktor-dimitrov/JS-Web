@@ -37,3 +37,18 @@ exports.getLogout = (req, res) => {
     res.clearCookie('auth');
     res.redirect('/');
 }
+
+exports.getProfilePage = async (req, res) => {
+    const email = req.user.email;
+    try{
+         const user = await authService.getUser(email);
+   
+         res.render('auth/profile', {user})
+   
+    }catch(error){
+        console.log(error);
+        res.redirect('/404');
+    }
+
+    
+}

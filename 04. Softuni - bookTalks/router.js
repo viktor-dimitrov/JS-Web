@@ -27,6 +27,8 @@ router.get('/edit/:_id/:_owner', isAuth, isOwner, bookController.getEditPage);
 router.post('/edit/:_id/:_owner', isAuth, isOwner, bookController.postEdit);
 router.get('/delete/:_id/:_owner', isAuth, isOwner, bookController.getDelete);
 
+router.get('/profile', isAuth, authController.getProfilePage);
+
 
 router.get('/*', homeController.getNotFoudPage);
 
