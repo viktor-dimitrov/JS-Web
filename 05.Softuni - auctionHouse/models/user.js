@@ -20,14 +20,15 @@ const userSchema = new mongoose.Schema({
         minLength:[ 1, 'Last name should be at least one characters long'],
         
     },
-    
-
     password: {
         type: String,
         required: true,
-        
-       
-    }
+    },
+
+    colsed:[ {
+        type: mongoose.Types.ObjectId
+    }]
+
 
 });
 

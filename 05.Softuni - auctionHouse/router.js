@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const homeController = require('./controllers/homeController');
 const authController = require('./controllers/authController');
+const auctionController = require('./controllers/auctionController')
 const { isAuth } = require('./middlewares/authMiddleware');
 
 
@@ -14,6 +15,10 @@ router.post('/login', authController.postLogin);
 router.get('/register', authController.getRegisterPage);
 router.post('/register', authController.postRegister);
 
+router.get('/create', auctionController.getCreatePage);
+router.post('/create', auctionController.postCreate);
+
+router.get('/catalog', auctionController.getCatalogPage);
 
 
 router.get('/*', homeController.getNotFoudPage);
