@@ -20,6 +20,8 @@ exports.createAuction = async (data) => {
     }
 }
 
+exports.delAuction = async (itemId) => await Auction.findByIdAndDelete(itemId)
+
 
 exports.updateBid = async (itemId, bidAmount, userId) => {
     try{

@@ -1,52 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/css/site.css">
-    <title>Edit Auction</title>
-</head>
-
-<body>
-
-    <div id="page-content">
-
-        <header>
-            <a href="/" class="title-logo">
-                <img src="/static/assets/logo.png">
-                <span>Auction House</span>
-            </a>
-            <nav class="main-nav nav-mid">
-                <ul>
-                    <li>
-                        <a href="#">Browse</a>
-                    </li>
-                    <!-- User actions -->
-                    <li class="user">
-                        <a href="#">Publish</a>
-                    </li>
-
-                    <!-- Bonus action -->
-                    <!--
-                    <li class="user">
-                        <a href="#">Closed Auctions</a>
-                    </li>
-                    -->
-
-                    <li class="user">
-                        <a href="#">Logout</a>
-                    </li>
-                    <!-- Guest actions -->
-                    <li class="guest">
-                        <a href="#">Register</a>
-                    </li>
-                    <li class="guest">
-                        <a href="#">Login</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
 
         <main>
 
@@ -66,12 +18,12 @@
 
                 <div class="item padded align-center">
 
-                    <form class="layout left large" method="" action="">
+                    <form class="layout left large" method="POST" >
 
                         <div class="col aligned">
                             <label>
                                 <span>Title</span>
-                                <input type="text" name="" value="Fishing Boat"></label>
+                                <input type="text" name="title" value="{{currentItem.title}}"></label>
                             <label>
                                 <span>Category</span>
                                 <select name="">
@@ -84,21 +36,20 @@
                             </label>
                             <label>
                                 <span>Image URL</span>
-                                <input type="text" name="" value="/static/assets/boat.jpg">
+                                <input type="text" name="imageUrl" value="{{currentItem.imageUrl}}">
                             </label>
                             <label>
                                 <span>Starting price</span>
 
                                 <!-- If the current auction has a bidder, this input field should be disabled -->
-                                <input type="number" name="" value="5000">
+                                <input type="number" name="number" value="5000">
                             </label>
                         </div>
 
                         <div class="content pad-med align-center vertical">
                             <label>
                                 <span>Description</span>
-                                <textarea name="">Excellent condition. Onboard diesel motor, upholstered cockpit, fishing sonar. Includes trailer.
-                                </textarea>
+                                <textarea name="description">{{currentItem.description}}</textarea>
                             </label>
 
                             <div class="align-center">
@@ -113,10 +64,3 @@
             </section>
 
         </main>
-
-        <footer>SoftUni &copy; 2022 | Design by Viktor Kostadinov</footer>
-    </div>
-
-</body>
-
-</html>

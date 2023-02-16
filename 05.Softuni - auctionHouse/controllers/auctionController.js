@@ -14,7 +14,24 @@ exports.getCatalogPage = async (req, res) => {
 }
 
 
+exports.getDetailsPage = async (req, res) => {
+  
+    try {
+        const currentItem =  await auctionService.getOne(req.params._id);
+        const isBidder = (currentItem.bidder?._id.toString() == req.user?._id);
+        const authorId = currentItem.author._id.toString()
 
+    if (authorId == req.user?._id){
+        res.render('auction/detailsowner', {currentItem, authorId});
+    } else {
+        res.render('auction/details', {currentItem, isBidder});
+    }
+    }catch(error){
+        console.log(error)
+        res.redirect('/404')
+      }
+
+}
 
 
 
@@ -28,7 +45,6 @@ exports.postCreate = async (req, res) => {
 
     try{
         await auctionService.createAuction(data);
-       
         res.redirect('/catalog');
     }catch(error){
         console.log(error);
@@ -37,24 +53,39 @@ exports.postCreate = async (req, res) => {
 }
 
 
+exports.getEditPage = async (req, res ) => {
+    try{
+        const currentItem = await auctionService.getOne(req.params._id);
 
-exports.getDetailsPage = async (req, res) => {
-  
-    try {
-        const currentItem =  await auctionService.getOne(req.params._id);
-        const isBidder = (currentItem.bidder?._id.toString() == req.user?._id);
-    if (currentItem.author == req.user?._id){
-        res.render('auction/detailsowner', {currentItem});
-    } else {
-        res.render('auction/details', {currentItem, isBidder});
-    }
+        res.render('auction/edit', {currentItem})
     }catch(error){
-        
-        console.log(error)
-        console.log('getDetails Page ----------------------')
-      }
+        console.log(error);
+        res.status(400).render('home/404')
+    }
 
+
+    res.render('auction/edit')
 }
+exports.postEdit = async (req, res) => {
+       
+}
+
+
+exports.getDelete = async (req, res) => {
+    try{
+            await auctionService.delAuction(req.params._id);
+            res.redirect('/catalog')
+    }catch(error){
+        console.log(error);
+        res.redirect('home/404')
+    }
+}
+
+
+
+
+
+
 
 exports.postBid = async (req, res) => {
     const bidAmount = req.body.bidAmount;
@@ -64,15 +95,16 @@ exports.postBid = async (req, res) => {
     try{
         let currentItem = await auctionService.getOne(itemId);
         if (currentItem.price < Number(bidAmount)){
-            // let isBidder = true;
+            
             try{
                   currentItem = await auctionService.updateBid(itemId, bidAmount, userId);
-                
                   res.redirect(`/details/${itemId}`);
             }catch(error){
                 console.log(error);
                 res.redirect('/404');    
             }
+
+
         } else {
             res.redirect(`/details/${itemId}`);
         }
@@ -80,5 +112,5 @@ exports.postBid = async (req, res) => {
         console.log(error);
         res.redirect('/404')
     }
-    // console.log('ee tuka e shibanata greshka kude q wadi ')
+   
 }  
