@@ -20,6 +20,9 @@ router.post('/create', auctionController.postCreate);
 
 router.get('/catalog', auctionController.getCatalogPage);
 
+router.get('/details/:_id', auctionController.getDetailsPage);
+
+router.post('/bid/:_id', auctionController.postBid)
 
 router.get('/*', homeController.getNotFoudPage);
 

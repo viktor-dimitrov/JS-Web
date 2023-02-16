@@ -1,0 +1,69 @@
+
+
+        <main>
+
+            <!-- In case of error, display the following div--><!--
+
+            <div class="error-box">
+                <p>Show each error in a separate paragraph</p>
+            </div>
+
+            -->
+            
+            <!-- Details Page - Auction owner -->
+            <section id="catalog-section">
+
+                <h1 class="item">
+                    {{currentItem.title}}
+                    <div class="f-right">
+                        <a class="action pad-small f-left" href="/edit/{{currentItem._id}}">Edit</a>
+                        <a class="action pad-small f-left" href="/delete/{{currentItem._id}}">Delete</a>
+                    </div>
+                </h1>
+                <div class="item padded">
+
+                    <div class="layout right large">
+                        
+                        <div class="col">
+                            <img src="{{currentItem.imageUrl}}" class="img-large">
+                        </div>
+
+                        <div class="content pad-med">
+
+                            <p>In category: <strong>Vehicles</strong></p>
+                            <p>{{currentItem.description}}</p>
+
+                            <div class="align-center">
+                                <div>
+                                    Current price: $<strong>{{currentItem.price}}</strong>
+                                </div>
+
+                                <div>
+
+                                    {{#if currentItem.bidder}}
+                                    <!-- If there is a bidder -->
+                                    Bid by <strong>{{currentItem.bidder.firstName}} {{currentItem.bidder.lastName}}</strong>
+
+                                    <!-- # Bonus: If there is a bidder --><!--
+
+                                    <a class="action pad-med cta" href="#">Close Auction</a>
+                                    
+                                    # End of Bonus -->
+
+                                    <!-- If there are no bids -->
+                                    {{else}}
+                                    No bids
+                                    {{/if}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <footer>Listed by {{currentItem.author.firstName}} {{currentItem.author.lastName}}</footer>
+                </div>
+
+            </section>
+
+        </main>
+

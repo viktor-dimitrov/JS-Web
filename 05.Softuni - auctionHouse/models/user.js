@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
 
-    colsed:[ {
+    closed:[ {
         type: mongoose.Types.ObjectId
     }]
 
