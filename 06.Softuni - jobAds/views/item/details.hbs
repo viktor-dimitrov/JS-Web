@@ -1,0 +1,140 @@
+
+
+
+
+
+
+
+        <main>
+
+            <section id="details-page">
+                <article class="details-gage-title">
+                    <h1>Details Page</h1>
+                </article>
+                <article class="details-page-card">
+
+                    <article class="details-page-card-image">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="/static/img/man.png" alt="details-image">
+                    </article>
+
+                    <article class="details-page-card-content">
+                        <p>Author: petar@abv.bg</p>
+                        <h2>Headline: Front End Developer</h2>
+                        <h3>Company name: Digital Solutions</h3>
+                        <h4>Company description: We are a group of 4000+ web application exprets</h4>
+                        <h5>Location: Location Sofia, Vitosha Park, Bulgaria</h5>
+
+                        <article class="details-page-card-buttons">
+                            <!--only for registered users and author of the ad-->
+                            <!--<a href="#" class="btn-edit">Edit</a>
+                            <a href="#" class="btn-delete">Delete</a>-->
+
+                            <!--logged in user who did not apply for current ad-->
+                            <!--<a href="#" class="btn-apply">Apply now!</a>
+                            <p class="applied-people">Hurry up, 1 people have already applied.</p>-->
+
+                            <!--logged in user who has already applied for current ad-->
+                            <!--<p class="already-applied">You have already applied!</p>-->
+                        </article>
+                    </article>
+
+                </article>
+            </section>
+
+            <!--This section should only be visible to the author of the current ad-->
+            <!--
+            <section id="info-about-candidates">
+                <h2>Candidates for this ad:</h2>
+                <!\--If there are people who have applied, show each of them in the following format--\>
+                <article class="info-about-candidates-card">
+                    <h2>Email: petar@abv.bg</h2>
+                    <h3>Description of the candidate's skills: Experience with HTML 5, CSS 3, Node.js</h3>
+                </article>
+
+                <article class="info-about-candidates-card">
+                    <h2>Email: ivan@abv.bg</h2>
+                    <h3>Description of the candidate's skills: Experience with Node.js</h3>
+                </article>
+                <!\--If not, you don't need to visualize anything further-\->
+            </section>-->
+
+        </main>
+
+
+
+
+
+
+{{!-- 
+
+        <main>
+
+            <!-- In case of error, display the following div--><!--
+
+            <div class="error-box">
+                <p>Show each error in a separate paragraph</p>
+            </div>
+
+            -->
+            
+            <!-- Details Page -->
+            <section id="catalog-section">
+
+                <h1 class="item">
+                    {{currentItem.title}}
+                </h1>
+                <div class="item padded">
+
+                    <div class="layout right large">
+
+                        <div class="col">
+                            <img src="{{currentItem.imageUrl}}" class="img-large">
+                        </div>
+
+                        <div class="content pad-med">
+
+                            <p>In category: <strong>{{currentItem.category}}</strong></p>
+                            <p>{{currentItem.description}}</p>
+
+                            <div class="align-center">
+                                <div>
+                                    Current price: $<strong>{{currentItem.price}}</strong>
+                                </div>
+
+                                <!-- If current user can place a bid -->
+                                {{#if isAuth}}
+
+                                {{#if isBidder}}
+                                  <div>
+                                    You are currently the <strong>highest bidder</strong> for this auction
+                                  </div>
+                                  {{else}}
+                                <form class="vertical" method="POST" action="/bid/{{currentItem._id}}">
+                                    <label><span>Bid amount</span><input type="number" name="bidAmount"></label>
+                                    <input class="action" type="submit" value="Place bid">
+                                </form>
+                                {{/if}}
+                                {{/if }}
+
+                                <!-- If current user is the bidder -->
+                            
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <footer>Listed by {{currentItem.author.firstName}} {{currentItem.author.lastName}}</footer>
+                </div>
+
+            </section>
+
+        </main>
+
+        <footer>SoftUni &copy; 2022 | Design by Viktor Kostadinov</footer>
+    </div>
+
+</body>
+
+</html> --}}
