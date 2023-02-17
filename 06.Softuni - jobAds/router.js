@@ -26,7 +26,7 @@ router.post('/edit/:_id/:_author', isAuth, isAuthor, itemController.postEdit);
 
 router.get('/delete/:_id/:_author', isAuth, isAuthor, itemController.getDelete);
 
-router.post('/bid/:_id', itemController.postBid)
+router.get('/apply/:_id', itemController.postApply)
 
 router.get('/*', homeController.getNotFoudPage);
 

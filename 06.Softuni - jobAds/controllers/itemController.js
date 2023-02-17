@@ -1,5 +1,6 @@
 
 const itemService = require('../services/itemService');
+const authService = require('../services/authService')
 
 
 exports.getCreatePage = (req, res) => {
@@ -32,19 +33,20 @@ exports.getCatalogPage = async (req, res) => {
    
 }
 
-
 exports.getDetailsPage = async (req, res) => {
+   
   
     try {
-        const currentItem =  await itemService.getOne(req.params._id);
-        const isBidder = (currentItem.bidder?._id.toString() == req.user?._id);
-        const authorId = currentItem.author._id.toString()
+        const item =  await itemService.getOne(req.params._id);
+        
+        const isAuthor = item.author._id.toString() == req.user?._id;
+        const appliedStrings = item.applied.map(el => el._id.toString());
+        const isApplied = appliedStrings.some(id => id == req.user?._id);
+    
+        console.log(item.applied)
+        res.render('item/details', {item, isAuthor, isApplied});
+   
 
-    if (authorId == req.user?._id){
-        res.render('item/detailsowner', {currentItem, authorId});
-    } else {
-        res.render('item/details', {currentItem, isBidder});
-    }
     }catch(error){
         console.log(error)
         res.redirect('/404')
@@ -97,30 +99,18 @@ exports.getDelete = async (req, res) => {
 
 
 
-exports.postBid = async (req, res) => {
-    const bidAmount = req.body.bidAmount;
+exports.postApply = async (req, res) => {
     const itemId = req.params._id;
     const userId = req.user._id;
 
     try{ 
-        let currentItem = await itemService.getOne(itemId);
-        if (currentItem.price < Number(bidAmount)){
-            
-            try{
-                  currentItem = await itemService.updateBid(itemId, bidAmount, userId);
+        let item = await itemService.getOne(itemId);
+
+         await itemService.updateApplied(itemId, userId);
                   res.redirect(`/details/${itemId}`);
             }catch(error){
                 console.log(error);
                 res.redirect('/404');    
             }
 
- 
-        } else {
-            res.redirect(`/details/${itemId}`);
-        }
-    }catch(error){
-        console.log(error);
-        res.redirect('/404')
-    }
-   
 }  

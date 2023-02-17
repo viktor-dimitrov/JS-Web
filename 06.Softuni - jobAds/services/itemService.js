@@ -3,9 +3,9 @@ const Ad = require('../models/ad');
 
 exports.getAll = async () => await Ad.find().lean();
 
-exports.getOne = async (auctionId) => {
+exports.getOne = async (itemId) => {
 try{
-     return await Ad.findById(auctionId).populate('bidder').populate('author').lean();
+     return await Ad.findById(itemId).populate('applied').populate('author').lean();
 }catch(error){
     throw new Error(error.message)
 }
@@ -34,9 +34,11 @@ exports.editItem = async (itemId, data) => {
 }
 
 
-exports.updateBid = async (itemId, bidAmount, userId) => {
+exports.updateApplied = async (itemId, userId) => {
     try{
-       return await Ad.findByIdAndUpdate(itemId, {price: Number(bidAmount), bidder: userId}).lean();
+
+        console.log(itemId, userId)
+          await Ad.findByIdAndUpdate(itemId, {$push: {applied: userId}}).lean();
 
     }catch(error){
         throw new Error(error.message)

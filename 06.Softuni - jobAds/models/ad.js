@@ -37,7 +37,7 @@ const adSchema = new mongoose.Schema({
         ref: 'user',
     
     },
-    aplied: [ {
+    applied: [ {
         type: mongoose.Types.ObjectId,
         ref: "user"
     }]
