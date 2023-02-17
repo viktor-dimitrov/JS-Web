@@ -1,7 +1,17 @@
 
+const itemService = require('../services/itemService')
 
-exports.getHomePage = (req, res) => {
-    res.render('home');
+exports.getHomePage = async (req, res) => {
+
+    try{
+        const result = await itemService.getAll();
+        const top3 = result.slice(0, 3);
+
+         res.render('home',{top3});
+    }catch(error){
+        res.redirect('/404');
+    }
+
 }
 
 exports.getNotFoudPage = (req, res) => {
@@ -9,14 +19,21 @@ exports.getNotFoudPage = (req, res) => {
 
 }
 
-exports.getSearchPage = async (req, res) => {
-    const {text, payment} = req.query
-    
+exports.getSearchPage =(req, res) => {
+            res.render('home/search');
+}
+
+exports.postSearch = async(req, res) => {
+    const {text} = req.body
+
     try{
-        const allCrypto = await cryptoService.searchCrypto(text, payment);
-        res.render('crypto/search', {allCrypto, text, payment});
+        const result  = await itemService.searchItems(text);
+        res.render('home/search', {result, text});
+
     }catch(error){
         res.redirect('/404');
     }
 
 }
+
+

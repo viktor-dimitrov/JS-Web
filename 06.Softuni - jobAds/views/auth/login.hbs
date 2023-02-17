@@ -19,10 +19,10 @@
                         <p>Welcome, see the new ads!</p>
 
                         <label for="email">Email:</label>
-                        <input type="text" id="email" placeholder="petar@abv.bg" name="email">
+                        <input type="text" id="email" placeholder="petar@abv.bg" name="email" value="{{#if error}}{{data.email}}{{/if}}">
 
                         <label for="password">Password:</label>
-                        <input type="password" id="password" placeholder="******" name="password">
+                        <input type="password" id="password" placeholder="******" name="password" value="{{#if error}}{{data.password}}{{/if}}">
 
                         <article class="login-page-button">
                             <button class="btn-login">Login</button>

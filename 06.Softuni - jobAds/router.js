@@ -7,8 +7,11 @@ const { isAuth, isAuthor } = require('./middlewares/authMiddleware');
 
 
 router.get('/', homeController.getHomePage);
-router.get('/logout', isAuth, authController.getLogout);
+router.get('/search', homeController.getSearchPage);
+router.post('/search', homeController.postSearch);
 
+
+router.get('/logout', isAuth, authController.getLogout);
 router.get('/login', authController.getLoginPage);
 router.post('/login', authController.postLogin);
 
@@ -26,7 +29,9 @@ router.post('/edit/:_id/:_author', isAuth, isAuthor, itemController.postEdit);
 
 router.get('/delete/:_id/:_author', isAuth, isAuthor, itemController.getDelete);
 
-router.get('/apply/:_id', itemController.postApply)
+router.get('/apply/:_id', itemController.postApply);
+
+
 
 router.get('/*', homeController.getNotFoudPage);
 

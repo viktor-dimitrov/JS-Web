@@ -13,7 +13,7 @@ exports.postLogin = async (req, res) => {
       res.redirect('/');
     }catch(error){
         console.log(error)
-        return res.status(400).render('auth/login', {error});
+        return res.status(400).render('auth/login', {data: req.body, error});
     }
 }
   
@@ -29,7 +29,7 @@ exports.postRegister = async (req, res) => {
         res.redirect('/');
     }catch(error){
         console.log(error)
-         return res.status(400).render('auth/register', {error})
+         return res.status(400).render('auth/register', {data: req.body, error})
     }
 }
 

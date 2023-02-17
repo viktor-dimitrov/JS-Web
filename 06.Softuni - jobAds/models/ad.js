@@ -16,20 +16,22 @@ const adSchema = new mongoose.Schema({
     headline: {
         type: String,
         required: true,
-        minLength: 1
+        minLength: 4
     },
     location: {
         type:  String,
         required: true,
-        minLength: 1
+        minLength: 8
     },
     name: {
         type: String,
         required: true,
+        minLength: 3
     },
     description: {
         type: String,
         required: true,
+        maxLength: 40
     },
   
     author: {

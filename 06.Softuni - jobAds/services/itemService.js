@@ -44,4 +44,25 @@ exports.updateApplied = async (itemId, userId) => {
         throw new Error(error.message)
     }
 } 
+
+
+exports.searchItems =async (text) => {
+
+    const allAdds = await Ad.find().populate('author').lean();
+
+    const allAuthors = allAdds.map(el => el = {email: el.author.email, headline: el.headline, name: el.name} );
+
+    const result = allAuthors.filter(el => el.email.includes(text));
+  
+    return result
+
+}
     
+
+// const expressions = [];
+      
+// if(text) {
+//     expressions.push({'author': {$regex: `${text}`, $options: 'i'}});
+// }
+
+// return Ad.find({$and: expressions}).lean();
