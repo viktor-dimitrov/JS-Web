@@ -15,6 +15,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true,'Email is required'],
         minLength: [1,'Email should be at least ten characters long'],
+        validate: {
+            validator: function (email) {
+              const emailRegex = /^[A-Za-z]+@[A-Za-z]+\.[A-Za-z]{2,}$/;
+              return emailRegex.test(email);
+            },
+            message: 'Invalid email format'
+          }
        
     },
 
@@ -26,6 +33,7 @@ const userSchema = new mongoose.Schema({
     skills: {
         type: String,
         required: true,
+        maxLength: 40
     },
 
     ads:[ {
