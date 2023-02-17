@@ -8,11 +8,11 @@
                 <div class="destination">
                     <div>
                         <span class="icon"><i class="fas fa-map-marked-alt"></i></span>
-                        <h5> from <span>Plovdiv</span> to <span>Burgas</span> </h5>
+                        <h5> from <span>{{item.start}}</span> to <span>{{item.end}}</span> </h5>
                     </div>
                     <div>
                         <span class="icon"><i class="fas fa-calendar-alt"></i></span>
-                        <h5> <span>2021-07-07</span> at <span>10:40</span> </h5>
+                        <h5> <span>{{item.date}}</span> at <span>{{item.time}}</span> </h5>
                     </div>
                 </div>
                 <p class="line"></p>
@@ -26,27 +26,32 @@
                         <!-- If not display: -->
                         <p>there are no buddies yet...</p>
                     </div>
-                    <h5>Driver: <span>mihail_valkov@mail.bg</span> </h5>
+                    <h5>Driver: <span>{{item.author.email}}</span> </h5>
                 </div>
                 <p class="line"></p>
-                <h5 class="brand">Car Brand: <span class="lead">Mercedes</span></h5>
+                <h5 class="brand">Car Brand: <span class="lead">{{item.brand}}</span></h5>
                 <div class="trip-info">
                     <div>
                         <img class="img-fluid rounded"
-                            src="https://www.nastarta.com/wp-content/uploads/2018/04/Mercedes-Benz-A-Class-2019-1280-3d.jpg"
+                            src="{{item.imageUrl}}"
                             alt="car-image">
                     </div>
                     <div class="trip-desc">
                         <h5>Information about the trip</h5>
-                        <textarea class="lead"
-                            disabled>Wishing you a safe journey and a relaxing vacation when you arrive!</textarea>
-                        <h5>Price: <span class="lead">40</span> BGN</h5>
+                        <textarea class="lead" disabled>{{item.description}}</textarea>
+                           
+                        <h5>Price: <span class="lead">{{item.price}}</span> BGN</h5>
 
                         <!-- if there are no logged in user do not show div with class actions  -->
+
+                        {{#if isAuth}}
                         <div class="actions">
                             <!-- Only for logged user and creator to this trip -->
-                            <a href="" class="btn btn-danger">Delete this trip</a>
-                            <a href="" class="btn btn-warning">Edit this trip</a>
+
+                            {{#if isAuthor}}
+                            <a href="/delete/{{item._id}}/{{item.author._id}}" class="btn btn-danger">Delete this trip</a>
+                            <a href="/edit/{{item._id}}/{{item.author._id}}" class="btn btn-warning">Edit this trip</a>
+                            {{/if}}
 
                             <!-- logged in user with available seats -->
                             <a href="" class="btn btn-join">Join now, [ 1 ] seats left!</a>
@@ -57,6 +62,7 @@
                             <!-- logged in user with no available seats -->
                             <span class="btn btn-secondary">No seats available! [0]</span>
                         </div>
+                        {{/if}}
 
                     </div>
                 </div>

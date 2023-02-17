@@ -40,12 +40,14 @@ exports.getDetailsPage = async (req, res) => {
     try {
         const item =  await itemService.getOne(req.params._id);
 
-        console.log(item)
-        // const isAuthor = item.author._id.toString() == req.user?._id;
+        console.log(item.author)
+         const isAuthor = item.author._id.toString() == req.user?._id;
         // const appliedStrings = item.applied.map(el => el._id.toString());
         // const isApplied = appliedStrings.some(id => id == req.user?._id);
+
+        console.log(isAuthor)
     
-        res.render('item/details', {item});
+        res.render('item/details', {item, isAuthor});
    
     }catch(error){
         console.log(error)
