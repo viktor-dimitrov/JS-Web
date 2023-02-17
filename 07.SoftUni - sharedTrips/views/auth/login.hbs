@@ -1,4 +1,10 @@
+{{#if error}}
+<div class="error">
+        <p>{{error.message}}</p>
+       
+    </div>
 
+{{/if}}
     <main>
         <section class="py-5" id="login-page">
             <div class="container login-page">
@@ -8,12 +14,12 @@
                         <div class="form-group">
                             <label for="email">Email address</label>
                             <input type="text" class="form-control" id="email" placeholder="Enter email" name="email"
-                                value="">
+                                value="{{#if error}}{{data.email}}{{else}}{{item.email}}{{/if}}">
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" class="form-control" id="password" placeholder="Password" name="password"
-                                value="">
+                                value="{{#if error}}{{data.password}}{{else}}{{item.password}}{{/if}}">
                         </div>
                         <div class="form-group">
                             <p>Not registered yet? <a href="/register">Register Now!</a></p>

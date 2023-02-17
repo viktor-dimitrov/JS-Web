@@ -29,7 +29,7 @@ router.post('/edit/:_id/:_author', isAuth, isAuthor, itemController.postEdit);
 
 router.get('/delete/:_id/:_author', isAuth, isAuthor, itemController.getDelete);
 
-router.get('/apply/:_id', itemController.postApply);
+router.get('/join/:_id', itemController.postJoin);
 
 
 

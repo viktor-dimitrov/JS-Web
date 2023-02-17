@@ -20,12 +20,12 @@ const tripSchema = new mongoose.Schema({
     start: {
         type: String,
         required: true,
-        minLength: 1
+        minLength: 4
     },
     end: {
         type:  String,
         required: true,
-        minLength: 1
+        minLength: 4
     },
     date: {
         type: String,
@@ -40,27 +40,38 @@ const tripSchema = new mongoose.Schema({
     imageUrl: {
         type: String,
         required: true,
+        validate:{
+            validator: function(value) {
+                return value.startsWith('http://') || value.startsWith('https://')
+            },
+            message: 'Invalid URL!!!'
+        }
         
     },
     brand: {
         type: String,
         required: true,
+        minLength: 4
       
     },
     seats: {
         type: Number,
         required: true,
+        min: 0,
+        max: 4
        
     },
     price: {
         type: Number,
         required: true,
+        min: 1,
+        max: 50
        
     },
     description: {
         type: String,
         required: true,
-        maxLength: 40
+        minLength: 10
     },
   
     author: {

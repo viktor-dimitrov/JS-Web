@@ -11,7 +11,7 @@ exports.getCreatePage = (req, res) => {
 exports.postCreate = async (req, res) => {
     const data = req.body;
     data.author = req.user._id;
-    data.buddies = null;
+   
     
     try{
         await itemService.createItem(data);
@@ -40,14 +40,17 @@ exports.getDetailsPage = async (req, res) => {
     try {
         const item =  await itemService.getOne(req.params._id);
 
-        console.log(item.author)
+   
          const isAuthor = item.author._id.toString() == req.user?._id;
-        // const appliedStrings = item.applied.map(el => el._id.toString());
-        // const isApplied = appliedStrings.some(id => id == req.user?._id);
 
-        console.log(isAuthor)
-    
-        res.render('item/details', {item, isAuthor});
+         const joinedStrings = item.buddies.map(el => el._id.toString());
+         const isJoined = joinedStrings.some(id => id == req.user?._id);
+         const hasSeats = item.seats > 0;
+
+         const emailList = item.buddies.map(el => el = el.email).join(', ')
+         console.log(emailList)
+        
+        res.render('item/details', {item, isAuthor, isJoined, hasSeats, emailList});
    
     }catch(error){
         console.log(error)
@@ -103,14 +106,16 @@ exports.getDelete = async (req, res) => {
 
 
 
-exports.postApply = async (req, res) => {
+exports.postJoin = async (req, res) => {
     const itemId = req.params._id;
     const userId = req.user._id;
 
     try{ 
-        let item = await itemService.getOne(itemId);
-
-         await itemService.updateApplied(itemId, userId);
+         let item = await itemService.getOne(itemId);
+       
+         const seats = item.seats - 1;
+       
+         await itemService.updateTrip(itemId, userId, seats);
                   res.redirect(`/details/${itemId}`);
             }catch(error){
                 console.log(error);

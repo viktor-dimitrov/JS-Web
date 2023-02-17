@@ -5,7 +5,7 @@ exports.getAll = async () => await Trip.find().lean();
 
 exports.getOne = async (itemId) => {
 try{
-     return await Trip.findById(itemId).populate('author').lean();
+     return await Trip.findById(itemId).populate('author').populate('buddies').lean();
 }catch(error){
     throw new Error(error.message)
 }
@@ -34,11 +34,11 @@ exports.editItem = async (itemId, data) => {
 }
 
 
-exports.updateApplied = async (itemId, userId) => {
+exports.updateTrip = async (itemId, userId, seats) => {
     try{
 
         console.log(itemId, userId)
-          await Trip.findByIdAndUpdate(itemId, {$push: {applied: userId}}).lean();
+          await Trip.findByIdAndUpdate(itemId, {$push: {buddies: userId }, seats: seats}).lean();
 
     }catch(error){
         throw new Error(error.message)
