@@ -21,16 +21,16 @@
                         <h2>Edit an ad</h2>
 
                         <label for="headline">Headline:</label>
-                        <input type="text" id="headline" name="" value="">
+                        <input type="text" id="headline" name="headline" value="{{#if error}}{{data.headline}}{{else}}{{item.headline}}{{/if}}">
 
                         <label for="location">Location:</label>
-                        <input type="text" id="location" name="" value="">
+                        <input type="text" id="location" name="location" value="{{#if error}}{{data.location}}{{else}}{{item.location}}{{/if}}">
 
                         <label for="company-name">Company name:</label>
-                        <input type="text" id="company-name" name="" value="">
+                        <input type="text" id="company-name" name="name" value="{{#if error}}{{data.name}}{{else}}{{item.name}}{{/if}}">
 
                         <label for="company-description">Company description:</label>
-                        <input type="text" id="company-description" name="" value="">
+                        <input type="text" id="company-description" name="description" value="{{#if error}}{{data.description}}{{else}}{{item.description}}{{/if}}">
 
                         <article class="edit-page-button">
                             <button class="btn-edit-ads">Edit</button>

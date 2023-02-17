@@ -38,15 +38,12 @@ exports.getDetailsPage = async (req, res) => {
   
     try {
         const item =  await itemService.getOne(req.params._id);
-        
         const isAuthor = item.author._id.toString() == req.user?._id;
         const appliedStrings = item.applied.map(el => el._id.toString());
         const isApplied = appliedStrings.some(id => id == req.user?._id);
     
-        console.log(item.applied)
         res.render('item/details', {item, isAuthor, isApplied});
    
-
     }catch(error){
         console.log(error)
         res.redirect('/404')
@@ -60,9 +57,11 @@ exports.getDetailsPage = async (req, res) => {
 
 exports.getEditPage = async (req, res ) => {
     try{
-        const currentItem = await itemService.getOne(req.params._id);
+        const item = await itemService.getOne(req.params._id);
 
-        res.render('item/edit', {currentItem})
+        console.log(item)
+
+        res.render('item/edit', {item})
     }catch(error){
         console.log(error);
         res.status(400).render('home/404')

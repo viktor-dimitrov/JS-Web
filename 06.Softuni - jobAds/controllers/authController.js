@@ -16,7 +16,7 @@ exports.postLogin = async (req, res) => {
         return res.status(400).render('auth/login', {error});
     }
 }
-
+  
 exports.getRegisterPage = (req, res) => {
     res.render('auth/register');
 }

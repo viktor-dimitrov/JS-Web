@@ -28,10 +28,12 @@ exports.isAuth = (req, res, next) => {
 
     next();
 }
-
+ 
 exports.isAuthor = (req, res, next) => {
+
+    console.log('--------------------middleware')
     console.log(req.user._id)
-    console.log(req.params._id)
+    console.log(req.params._author)
     if(req.user._id != (req.params._author)){
       
         return res.redirect('home/404');

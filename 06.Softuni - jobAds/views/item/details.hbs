@@ -31,15 +31,15 @@
                             {{#if isAuth }}
 
                                     {{#if isAuthor}}
-                                           <a href="#" class="btn-edit">Edit</a>
-                                           <a href="#" class="btn-delete">Delete</a>
+                                           <a href="/edit/{{item._id}}/{{item.author._id}}" class="btn-edit">Edit</a>
+                                           <a href="/delete/{{item._id}}/{{item.author._id}}" class="btn-delete">Delete</a>
                                     {{else}}
 
                                     {{#if isApplied}}
                                         <p class="already-applied">You have already applied!</p>
                                     {{else}}
                                          <a href="/apply/{{item._id}}" class="btn-apply">Apply now!</a>
-                                         <p class="applied-people">Hurry up, 1 people have already applied.</p>
+                                         <p class="applied-people">Hurry up, {{item.applied.length}} people have already applied.</p>
                                     {{/if}}
 
                                     {{/if}}
@@ -62,6 +62,8 @@
                 </article>
             </section>
 
+            {{#if isAuthor}}
+
             {{#if item.applied}}
 
              <section id="info-about-candidates">
@@ -75,6 +77,8 @@
                 {{/each}}
 
                 </section>
+
+            {{/if}}
 
             {{/if}}
             <!--This section should only be visible to the author of the current ad-->
