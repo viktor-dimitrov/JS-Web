@@ -34,7 +34,6 @@ exports.getDetailsPage = async (req, res) => {
 }
 
 
-
 exports.getCreatePage = (req, res) => {
     res.render('auction/create');
 }
@@ -48,7 +47,7 @@ exports.postCreate = async (req, res) => {
         res.redirect('/catalog');
     }catch(error){
         console.log(error);
-        return res.status(400).render('auth/register', {error})
+        return res.status(400).render('auction/create', {data, error})
     }
 }
 
@@ -64,12 +63,19 @@ exports.getEditPage = async (req, res ) => {
     }
 
 
-    res.render('auction/edit')
+    
 }
 exports.postEdit = async (req, res) => {
-       
-}
+    const data = req.body;
+       try{
+            await auctionService.editAuction(req.params._id, data);
+            res.redirect(`/details/${req.params._id}`)
+       }catch(error){
+            console.log(error);
+            return res.status(400).render('auction/edit', {data, error})
 
+       }
+}
 
 exports.getDelete = async (req, res) => {
     try{
@@ -92,7 +98,7 @@ exports.postBid = async (req, res) => {
     const itemId = req.params._id;
     const userId = req.user._id;
 
-    try{
+    try{ 
         let currentItem = await auctionService.getOne(itemId);
         if (currentItem.price < Number(bidAmount)){
             
@@ -104,7 +110,7 @@ exports.postBid = async (req, res) => {
                 res.redirect('/404');    
             }
 
-
+ 
         } else {
             res.redirect(`/details/${itemId}`);
         }

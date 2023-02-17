@@ -33,6 +33,7 @@ exports.isAuthor = (req, res, next) => {
     console.log(req.user._id)
     console.log(req.params._id)
     if(req.user._id != (req.params._author)){
+      
         return res.redirect('home/404');
     }
     next();

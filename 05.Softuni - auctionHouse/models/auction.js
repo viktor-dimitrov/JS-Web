@@ -5,10 +5,14 @@ const validators = require('mongoose-validators');
 const auctionSchema = new mongoose.Schema({
 
     title: {
-        type: String
+        type: String,
+        required: true,
+        minLenght: 4
     },
     description: {
         type:  String,
+        required: true,
+        minLenght: 200
     },
     category: {
         type: String
@@ -17,19 +21,19 @@ const auctionSchema = new mongoose.Schema({
         type: String
     },
     price: {
-        type: Number
+        type: Number,
+        min: 0
     },
     author: {
         type: mongoose.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
+        required: true
     },
     bidder:  {
         type: mongoose.Types.ObjectId,
         ref: "user"
     }
     
-    
-
 })
 
 const Auction = mongoose.model('auction', auctionSchema);

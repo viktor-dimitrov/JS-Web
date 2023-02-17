@@ -10,6 +10,14 @@
             </div>
 
             -->
+{{#if error}}
+
+
+<div class="error-box">
+    <p>{{error.message}}</p>
+</div>
+
+{{/if}}
 
             <!-- Create Page -->
             <section id="create-section" class="">
@@ -23,7 +31,7 @@
                         <div class="col aligned">
                             <label>
                                 <span>Title</span>
-                                <input type="text" name="title"></label>
+                                <input type="text" name="title"  {{#if error}}value="{{data.title}}" {{/if}}></label>
                             <label>
                                 <span>Category</span>
                                 <select name="category">
@@ -36,16 +44,16 @@
                             </label>
                             <label>
                                 <span>Image URL</span>
-                                <input type="text" name="imageUrl"></label>
+                                <input type="text" name="imageUrl" {{#if error}}value="{{data.imageUrl}}" {{/if}}></label>
                             <label>
                                 <span>Starting price</span>
-                                <input type="number" name="price"></label>
+                                <input type="number" name="price" {{#if error}}value="{{data.price}}" {{/if}}></label>
                         </div>
 
                         <div class="content pad-med align-center vertical">
                             <label>
                                 <span>Description</span>
-                                <textarea name="description"></textarea>
+                                <textarea name="description">{{#if error}}{{data.description}}{{/if}}</textarea>
                             </label>
 
                             <div class="align-center">

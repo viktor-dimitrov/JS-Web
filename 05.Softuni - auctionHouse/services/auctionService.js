@@ -20,7 +20,18 @@ exports.createAuction = async (data) => {
     }
 }
 
-exports.delAuction = async (itemId) => await Auction.findByIdAndDelete(itemId)
+exports.delAuction = async (itemId) => await Auction.findByIdAndDelete(itemId);
+
+exports.editAuction = async (itemId, data) => {
+   
+    try{
+        await Auction.findByIdAndUpdate(itemId, data, {runValidators: true})
+
+    }catch(error){
+       
+        throw new Error((error.message).split(':')[2].split(',')[0])
+    }
+}
 
 
 exports.updateBid = async (itemId, bidAmount, userId) => {
