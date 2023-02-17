@@ -3,6 +3,13 @@
 
         <main>
 
+
+{{#if error}}
+            <div class="error-box">
+            <p>{{error.message}}</p>
+        </div>
+{{/if}}
+
             <section id="login-page">
 
                 <article class="login-page-container">

@@ -1,7 +1,7 @@
 const Ad = require('../models/ad');
 
 
-exports.getAll = async () => await Auction.find().lean();
+exports.getAll = async () => await Ad.find().lean();
 
 exports.getOne = async (auctionId) => {
 try{
@@ -16,7 +16,7 @@ exports.createItem = async (data) => {
         await Ad.create(data);
     }catch(error){
         console.log(error)
-        throw new Error((error.message).split(':')[2].split(',')[0])
+        throw new Error((error.message).split(':')[2].split(',')[0]);
     }
 }
 

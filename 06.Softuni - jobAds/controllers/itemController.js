@@ -2,6 +2,25 @@
 const itemService = require('../services/itemService');
 
 
+exports.getCreatePage = (req, res) => {
+    res.render('item/create');
+}
+
+
+exports.postCreate = async (req, res) => {
+    const data = req.body;
+    data.author = req.user._id;
+    
+    try{
+        await itemService.createItem(data);
+        res.redirect('/catalog');
+    }catch(error){
+        console.log(error);
+        return res.status(400).render('item/create', {data, error})
+    }
+}
+
+
 exports.getCatalogPage = async (req, res) => {
     try{
         const items = await itemService.getAll();
@@ -34,22 +53,7 @@ exports.getDetailsPage = async (req, res) => {
 }
 
 
-exports.getCreatePage = (req, res) => {
-    res.render('item/create');
-}
-exports.postCreate = async (req, res) => {
-    const data = req.body;
-    data.author = req.user._id;
-    data.bidder = null;
 
-    try{
-        await itemService.createItem(data);
-        res.redirect('/catalog');
-    }catch(error){
-        console.log(error);
-        return res.status(400).render('item/create', {data, error})
-    }
-}
 
 
 exports.getEditPage = async (req, res ) => {

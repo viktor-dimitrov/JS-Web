@@ -34,6 +34,8 @@
                     <li class="header-nav-list-item">
                         <a href="/catalog" class="header-nav-list-item-link">All ads</a>
                     </li>
+
+                    {{#if isAuth}}
                     <!-- Logged users -->
                     <li class="header-nav-list-item">
                         <a href="/create" class="header-nav-list-item-link">Create Ad</a>
@@ -45,6 +47,8 @@
                         <a href="/logout" class="header-nav-list-item-link">Logout</a>
                     </li>
 
+                    {{else}}
+
                     <!-- Guest users -->
                     <li class="header-nav-list-item">
                         <a href="/register" class="header-nav-list-item-link">Register</a>
@@ -52,6 +56,8 @@
                     <li class="header-nav-list-item">
                         <a href="/login" class="header-nav-list-item-link">Login</a>
                     </li>
+
+                    {{/if}}
                 </ul>
             </nav>
         </header>

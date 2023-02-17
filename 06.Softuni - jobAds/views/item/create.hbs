@@ -5,6 +5,13 @@
 
         <main>
 
+
+{{#if error}}
+            <div class="error-box">
+            <p>{{error.message}}</p>
+        </div>
+{{/if}}
+
             <section id="create-page">
 
                 <article class="create-page-container">
@@ -12,16 +19,16 @@
                         <h2>Create an ad</h2>
 
                         <label for="headline">Headline:</label>
-                        <input type="text" id="headline" placeholder="Front-End Developer with React" name="" value="">
+                        <input type="text" id="headline" placeholder="Front-End Developer with React" name="headline" value="">
 
                         <label for="location">Location:</label>
-                        <input type="text" id="location" placeholder="Ruse, Bulgaria" name="" value="">
+                        <input type="text" id="location" placeholder="Ruse, Bulgaria" name="location" value="">
 
                         <label for="company-name">Company name:</label>
-                        <input type="text" id="company-name" placeholder="Digital Solutions" name="" value="">
+                        <input type="text" id="company-name" placeholder="Digital Solutions" name="name" value="">
 
                         <label for="company-description">Company description:</label>
-                        <input type="text" id="company-description" placeholder="We are developing a web application" name="" value="">
+                        <input type="text" id="company-description" placeholder="We are developing a web application" name="description" value="">
 
                         <article class="create-page-button">
                             <button class="btn-create">Create</button>
