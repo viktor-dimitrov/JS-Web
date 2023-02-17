@@ -1,0 +1,174 @@
+
+
+
+
+    <main>
+        <section class="py-5 details" id="trip-details-page">
+            <div class="container">
+                <div class="destination">
+                    <div>
+                        <span class="icon"><i class="fas fa-map-marked-alt"></i></span>
+                        <h5> from <span>Plovdiv</span> to <span>Burgas</span> </h5>
+                    </div>
+                    <div>
+                        <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                        <h5> <span>2021-07-07</span> at <span>10:40</span> </h5>
+                    </div>
+                </div>
+                <p class="line"></p>
+                <div class="buddies-info">
+                    <i class="fas fa-users buddies"></i>
+                    <h5>Shared trip Buddies</h5>
+                    <div>
+                        <!-- if there are joined buddies for the current trip separate them with comma and space", " -->
+                        <p>peter@abv.bg, marry@abv.bg</p>
+
+                        <!-- If not display: -->
+                        <p>there are no buddies yet...</p>
+                    </div>
+                    <h5>Driver: <span>mihail_valkov@mail.bg</span> </h5>
+                </div>
+                <p class="line"></p>
+                <h5 class="brand">Car Brand: <span class="lead">Mercedes</span></h5>
+                <div class="trip-info">
+                    <div>
+                        <img class="img-fluid rounded"
+                            src="https://www.nastarta.com/wp-content/uploads/2018/04/Mercedes-Benz-A-Class-2019-1280-3d.jpg"
+                            alt="car-image">
+                    </div>
+                    <div class="trip-desc">
+                        <h5>Information about the trip</h5>
+                        <textarea class="lead"
+                            disabled>Wishing you a safe journey and a relaxing vacation when you arrive!</textarea>
+                        <h5>Price: <span class="lead">40</span> BGN</h5>
+
+                        <!-- if there are no logged in user do not show div with class actions  -->
+                        <div class="actions">
+                            <!-- Only for logged user and creator to this trip -->
+                            <a href="" class="btn btn-danger">Delete this trip</a>
+                            <a href="" class="btn btn-warning">Edit this trip</a>
+
+                            <!-- logged in user with available seats -->
+                            <a href="" class="btn btn-join">Join now, [ 1 ] seats left!</a>
+
+                            <!-- logged in user and has already joined the trip  -->
+                            <span class="btn btn-info">Already joined. Don't be late!</span>
+
+                            <!-- logged in user with no available seats -->
+                            <span class="btn btn-secondary">No seats available! [0]</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+
+{{!-- 
+        <main>
+
+            <section id="details-page">
+                <article class="details-gage-title">
+                    <h1>Details Page</h1>
+                </article>
+                <article class="details-page-card">
+
+                    <article class="details-page-card-image">
+                        <!-- Do not forget to change the path to the image -->
+                        <img src="/static/img/man.png" alt="details-image">
+                    </article>
+
+                    <article class="details-page-card-content">
+                        <p>Author: {{item.author.email}}</p>
+                        <h2>Headline: {{item.headline}}</h2>
+                        <h3>Company name: {{item.name}}</h3>
+                        <h4>Company description: {{item.description}}</h4>
+                        <h5>Location: {{item.location}}</h5>
+
+                        <article class="details-page-card-buttons">
+                            <!--only for registered users and author of the ad-->
+
+                            {{#if isAuth }}
+
+                                    {{#if isAuthor}}
+                                           <a href="/edit/{{item._id}}/{{item.author._id}}" class="btn-edit">Edit</a>
+                                           <a href="/delete/{{item._id}}/{{item.author._id}}" class="btn-delete">Delete</a>
+                                    {{else}}
+
+                                    {{#if isApplied}}
+                                        <p class="already-applied">You have already applied!</p>
+                                    {{else}}
+                                         <a href="/apply/{{item._id}}" class="btn-apply">Apply now!</a>
+                                         <p class="applied-people">Hurry up, {{item.applied.length}} people have already applied.</p>
+                                    {{/if}}
+
+                                    {{/if}}
+
+                            {{else}}
+
+                            {{/if}}
+                            <!--<a href="#" class="btn-edit">Edit</a>
+                            <a href="#" class="btn-delete">Delete</a>-->
+
+                            <!--logged in user who did not apply for current ad-->
+                            <!--<a href="#" class="btn-apply">Apply now!</a>
+                            <p class="applied-people">Hurry up, 1 people have already applied.</p>-->
+
+                            <!--logged in user who has already applied for current ad-->
+                            <!--<p class="already-applied">You have already applied!</p>-->
+                        </article>
+                    </article>
+
+                </article>
+            </section>
+
+            {{#if isAuthor}}
+
+            {{#if item.applied}}
+
+             <section id="info-about-candidates">
+                <h2>Candidates for this ad:</h2>
+
+                {{#each item.applied}}
+                <article class="info-about-candidates-card">
+                    <h2>Email: {{email}}</h2>
+                    <h3>Description of the candidate's skills: {{skills}}</h3>
+                </article>
+                {{/each}}
+
+                </section>
+
+            {{/if}}
+
+            {{/if}}
+            <!--This section should only be visible to the author of the current ad-->
+            <!--
+
+              
+            <section id="info-about-candidates">
+                <h2>Candidates for this ad:</h2>
+                <!\--If there are people who have applied, show each of them in the following format--\>
+                <article class="info-about-candidates-card">
+                    <h2>Email: petar@abv.bg</h2>
+                    <h3>Description of the candidate's skills: Experience with HTML 5, CSS 3, Node.js</h3>
+                </article>
+
+                <article class="info-about-candidates-card">
+                    <h2>Email: ivan@abv.bg</h2>
+                    <h3>Description of the candidate's skills: Experience with Node.js</h3>
+                </article>
+                <!\--If not, you don't need to visualize anything further-\->
+            </section>-->
+
+        </main>
+
+
+ --}}
+
+
+
