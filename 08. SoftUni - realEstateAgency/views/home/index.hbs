@@ -1,0 +1,39 @@
+        <main>
+            <section id="home-page" class="background-image">
+                <div class="home-container">
+
+                    <div class="info">
+                        <h1>Discover Your Perfect Home</h1>
+                        <h2>The Best Real Estate Deals</h2>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="top-houses">
+                <h1>Top Houses</h1>
+                <div class="houses">
+
+                    {{#if top3}}
+
+                        {{#each top3}}
+                    <div class="card-home">
+                        <h2>name</h2>
+                        <div class="cta-container"><a href="/details/{{_id}}" class="details-link">Details</a></div>
+                        <div class="card_image"><img src="{{imageUrl}}"></div>
+
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <div class="no-data-container">
+                        <p class="no-data">There are no housing offers found...</p>
+                    </div>
+                    {{/if}}
+                    <!-- If there are still no offers for housing in the database display: -->
+                    <!--<div class="no-data-container">
+                        <p class="no-data">There are no housing offers found...</p>
+                    </div>-->
+
+                </div>
+            </section>
+        </main>

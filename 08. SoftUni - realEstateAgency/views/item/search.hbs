@@ -1,0 +1,31 @@
+
+        <main>
+            <form class="search" method="POST">
+                <input type="search" name="text" placeholder="Search here...">
+                <button type="submit">Search</button>
+            </form>
+            <section id="find-section">
+
+                <!-- If there are any matching matches from the search, show each of them -->
+              {{#each result}}
+                <div class="card">
+                    <h3>{{name}}</h3>
+                    <p>{{description}}</p>
+                    <div class="cta-container"><a href="/details/{{_id}}" class="det-link">Details</a></div>
+                    <div class="card_circle"><img src="{{imageUrl}}"></div>
+
+                </div>
+                {{else}}
+                    <div class="no-data-listing">
+                    <p class="no-offer">No match was found for the submitted type...</p>
+                </div>
+
+                {{/each}}
+
+                <!-- If there are no search matches, show: -->
+                <!--<div class="no-data-listing">
+                    <p class="no-offer">No match was found for the submitted type...</p>
+                </div>-->
+            </section>
+        </main>
+ 

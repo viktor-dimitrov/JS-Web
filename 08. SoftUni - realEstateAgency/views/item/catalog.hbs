@@ -1,0 +1,40 @@
+
+
+
+
+        <main>
+
+            <section id="all-listings">
+                <h1>Apartments for recents</h1>
+                <!-- If there are offers for housing in the database display each of them -->
+
+
+                    {{#if items}}
+
+                    {{#each items}}
+                    {{>item}}
+                    {{/each}}
+
+                    {{else}}
+
+                <div class="no-data-listing">
+                    <p class="no-offer">There are no housing offers found...</p>
+                </div>
+                    {{/if}}
+ 
+
+
+
+                <!-- If there are still no offers for housing in the database display: -->
+                <!--<div class="no-data-listing">
+                    <p class="no-offer">There are no housing offers found...</p>
+                </div>-->
+
+            </section>
+        </main>
+
+
+
+
+
+

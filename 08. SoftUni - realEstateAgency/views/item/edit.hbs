@@ -1,0 +1,71 @@
+
+        {{#if error}}
+        <div>
+            <div class="errorContainer">
+                <p>{{error.message}}</p>
+            </div>
+        </div>
+        {{/if}}
+
+        <main>
+            <section id="edit-page">
+                <div class="edit-container">
+                    <div class="box-image">
+
+                    </div>
+                    <h2 class="box-heading">
+                        Edit Home
+                    </h2>
+
+                    <form class="form" method="POST">
+                        <div class="input">
+                            <input type="text" class="input-field" id="home-name" name="name" value="{{#if error}}{{data.name}}{{else}}{{item.name}}{{/if}}" />
+                            <label class="home-name">Name:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" class="input-field" id="type" name="type" value="{{#if error}}{{data.type}}{{else}}{{item.type}}{{/if}}" />
+                            <label class="type">Property Type:</label>
+                        </div>
+                        <div class="input">
+                            <input type="number" class="input-field" id="year" name="year" value="{{#if error}}{{data.year}}{{else}}{{item.year}}{{/if}}" />
+                            <label class="year">Year Built:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" class="input-field" id="city" name="city" value="{{#if error}}{{data.city}}{{else}}{{item.city}}{{/if}}" />
+                            <label class="city">City</label>
+                        </div>
+
+                        <div class="input">
+                            <input type="text" class="input-field" id="homeImage" name="imageUrl" value="{{#if error}}{{data.imageUrl}}{{else}}{{item.imageUrl}}{{/if}}" />
+                            <label class="homeImage">Home Image:</label>
+                        </div>
+
+                        <div class="input">
+                            <input type="text" class="input-field" id="description" name="description" value="{{#if error}}{{data.description}}{{else}}{{item.description}}{{/if}}" />
+                            <label class="description">Property Description:</label>
+                        </div>
+
+                        <div class="input">
+                            <input type="number" class="input-field" id="availablePieces" name="pieces" value="{{#if error}}{{data.pieces}}{{else}}{{item.pieces}}{{/if}}" />
+                            <label class="availablePieces">Available pieces:</label>
+                        </div>
+
+                        <div class="create-action">
+                            <button class="create-button">Edit</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+
+
+
+
+
+
+
+
+
+
+
