@@ -17,32 +17,32 @@ const validators = require('mongoose-validators');
 
 const tripSchema = new mongoose.Schema({
 
-    startPoint: {
+    start: {
         type: String,
         required: true,
-        minLength: 4
+        minLength: 1
     },
-    endPoint: {
+    end: {
         type:  String,
         required: true,
-        minLength: 8
+        minLength: 1
     },
     date: {
         type: String,
         required: true,
-        minLength: 3
+        minLength: 1
     },
     time: {
         type: String,
         required: true,
        
     },
-    carImg: {
+    imageUrl: {
         type: String,
         required: true,
         
     },
-    carBrand: {
+    brand: {
         type: String,
         required: true,
       

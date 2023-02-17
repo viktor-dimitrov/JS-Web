@@ -11,6 +11,7 @@ exports.getCreatePage = (req, res) => {
 exports.postCreate = async (req, res) => {
     const data = req.body;
     data.author = req.user._id;
+    data.buddies = null;
     
     try{
         await itemService.createItem(data);
@@ -38,11 +39,13 @@ exports.getDetailsPage = async (req, res) => {
   
     try {
         const item =  await itemService.getOne(req.params._id);
-        const isAuthor = item.author._id.toString() == req.user?._id;
-        const appliedStrings = item.applied.map(el => el._id.toString());
-        const isApplied = appliedStrings.some(id => id == req.user?._id);
+
+        console.log(item)
+        // const isAuthor = item.author._id.toString() == req.user?._id;
+        // const appliedStrings = item.applied.map(el => el._id.toString());
+        // const isApplied = appliedStrings.some(id => id == req.user?._id);
     
-        res.render('item/details', {item, isAuthor, isApplied});
+        res.render('item/details', {item});
    
     }catch(error){
         console.log(error)

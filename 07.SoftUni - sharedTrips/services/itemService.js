@@ -1,11 +1,11 @@
-const Ad = require('../models/ad');
+const Trip = require('../models/trip');
 
 
-exports.getAll = async () => await Ad.find().lean();
+exports.getAll = async () => await Trip.find().lean();
 
 exports.getOne = async (itemId) => {
 try{
-     return await Ad.findById(itemId).populate('applied').populate('author').lean();
+     return await Trip.findById(itemId).populate('author').lean();
 }catch(error){
     throw new Error(error.message)
 }
@@ -13,19 +13,19 @@ try{
 
 exports.createItem = async (data) => {
     try{
-        await Ad.create(data);
+        await Trip.create(data);
     }catch(error){
         console.log(error)
         throw new Error((error.message).split(':')[2].split(',')[0]);
     }
 }
 
-exports.delItem = async (itemId) => await Ad.findByIdAndDelete(itemId);
+exports.delItem = async (itemId) => await Trip.findByIdAndDelete(itemId);
 
 exports.editItem = async (itemId, data) => {
    
     try{
-        await Ad.findByIdAndUpdate(itemId, data, {runValidators: true})
+        await Trip.findByIdAndUpdate(itemId, data, {runValidators: true})
 
     }catch(error){
        
@@ -38,7 +38,7 @@ exports.updateApplied = async (itemId, userId) => {
     try{
 
         console.log(itemId, userId)
-          await Ad.findByIdAndUpdate(itemId, {$push: {applied: userId}}).lean();
+          await Trip.findByIdAndUpdate(itemId, {$push: {applied: userId}}).lean();
 
     }catch(error){
         throw new Error(error.message)
@@ -48,7 +48,7 @@ exports.updateApplied = async (itemId, userId) => {
 
 exports.searchItems =async (text) => {
 
-    const allAdds = await Ad.find().populate('author').lean();
+    const allAdds = await Trip.find().populate('author').lean();
 
     const allAuthors = allAdds.map(el => el = {email: el.author.email, headline: el.headline, name: el.name} );
 
