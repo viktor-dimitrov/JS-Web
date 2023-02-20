@@ -1,0 +1,46 @@
+
+
+
+
+
+    <main>
+
+        <!-- Start Register Section -->
+        <div class="login-register-div">
+            <div class="login-register-box">
+                <h1>Petstagram</h1>
+
+                <!-- Start Register Form -->
+                <form method="POST">
+                    <input type="text" name="username" placeholder="Username" value="{{#if error}}{{data.username}}{{/if}}">
+
+                    <input type="email" name="email" placeholder="Email" value="{{#if error}}{{data.email}}{{/if}}">
+
+                    <input type="password" name="password" placeholder="Password" value="{{#if error}}{{data.password}}{{/if}}">
+
+                    <input type="password" name="repassword" placeholder="Repeat Password" value="{{#if error}}{{data.repassword}}{{/if}}">
+
+                    <!-- Register Button -->
+                    <button type="submit">Register</button>
+                </form>
+
+            </div>
+            <div class="second-option">
+
+                <!-- Link to Login Page -->
+                <p>Have an account? <a href="/login">LogIn</a></p>
+            </div>
+        </div>
+
+    </main>
+
+
+
+
+
+
+
+
+
+
+
