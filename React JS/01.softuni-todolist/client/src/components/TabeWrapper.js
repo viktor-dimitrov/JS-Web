@@ -1,6 +1,7 @@
+import Todo from "./Todo"
+
 export default function TableWarapper({ todos, changeStatus }) {
 
-    console.log(todos)
 
     return (
         <div className="table-wrapper">
@@ -22,14 +23,8 @@ export default function TableWarapper({ todos, changeStatus }) {
 
                 <tbody>
 
-                    {todos.map(todo => (
-                        <tr key={todo._id} className={todo.isCompleted ? "todo is-completed" : "todo" }>
-                            <td>{todo.text}</td>
-                            <td>{todo.isCompleted ? 'Complete' : 'Incomplete'}</td>
-                            <td className="todo-action">
-                                <button className="btn todo-btn" onClick={() => changeStatus(todo._id) }>Change status</button>
-                            </td>
-                        </tr>
+                    {todos.map(todo => ( <Todo key={todo._id} changeStatus={changeStatus} {...todo}/>
+
                     ))}
 
 

@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import AddTodo from './components/AddTodo';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import TableWarapper from './components/TabeWrapper';
@@ -17,33 +18,33 @@ function App() {
     })
   }, []);
 
-  const changeStatus = (id) => {
+  const onChangeStatus = (id) => {
     setTodos(state => state.map(todo => todo._id === id ? ({...todo, isCompleted: !todo.isCompleted}) : todo))
   }
 
-
+  const onAddTodo = () => {
+    const newTodo = {
+        _id : `todo_${Number(todos[todos.length -1]._id.split('_')[1]) + 1}`,
+        text : prompt('Task text:'),
+        isCompleted : false
+    }
+    setTodos(state => [...state, newTodo ]);
+  }
 
   return (
-
     <>
- 
     <Header />
-
-  
     {/* <!-- Main content --> */}
     <main className="main">
   
       {/* <!-- Section container --> */}
       <section className="todo-list-container">
         <h1>Todo List</h1>
-  
 
-        <div className="add-btn-container">
-            <button className="btn">+ Add new Todo</button>
-        </div>
-  
-      <TableWarapper todos={todos} changeStatus={changeStatus}/>
+        < AddTodo addTodo={onAddTodo} />
 
+  
+      <TableWarapper todos={todos} changeStatus={onChangeStatus}/>
 
       </section>
     </main>
