@@ -3,18 +3,20 @@ import AddTodo from './components/AddTodo';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import TableWarapper from './components/TabeWrapper';
-// import Loading from './components/Loading'
+import Loading from './components/Loading'
 
 
 function App() {
 
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect( () => {
     fetch(`http://localhost:3030/jsonstore/todos`)
     .then(res => res.json())
     .then(data => {
       setTodos(Object.values(data));
+      setLoading(false);
     })
   }, []);
 
@@ -34,22 +36,20 @@ function App() {
   return (
     <>
     <Header />
-    {/* <!-- Main content --> */}
+
     <main className="main">
   
-      {/* <!-- Section container --> */}
+ 
       <section className="todo-list-container">
         <h1>Todo List</h1>
 
         < AddTodo addTodo={onAddTodo} />
-
-  
-      <TableWarapper todos={todos} changeStatus={onChangeStatus}/>
-
+         {isLoading ? < Loading /> :  <TableWarapper todos={todos} changeStatus={onChangeStatus}/> }
+        
       </section>
     </main>
   
-    {/* <!-- Footer --> */}
+
 <Footer />
     </>
   );
