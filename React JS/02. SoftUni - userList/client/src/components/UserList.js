@@ -1,6 +1,7 @@
 import { useState } from "react"
 import User from "./User"
 import UserDetails from "./UserDetails";
+import * as userService from "../services/userService";
 
 
 export default function UserList({users}) {
@@ -8,15 +9,21 @@ export default function UserList({users}) {
      const [selectedUser, setSelectedUser] = useState(null);
 
      const onInfoClick = (_id) => {
-        setSelectedUser(_id);
-        console.log(_id)
+        userService.getOne(_id)
+        .then(user => {
+            setSelectedUser(user);
+        })
+        
  }
+    const onClose = () => {
+        setSelectedUser(null);
+    }
 
     return (
 
         
         <div className="table-wrapper">
-            {selectedUser ? < UserDetails /> : null }
+            {selectedUser ? < UserDetails onClose={onClose} user={selectedUser} /> : null }
             {/* <!-- Overlap components  --> */}
 
             {/* <div className="loading-shade"> */}

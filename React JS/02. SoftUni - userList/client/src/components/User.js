@@ -1,7 +1,6 @@
-function formatDate(input) {
-    const date = new Date (input);
-    return date.toLocaleDateString();
-}
+import formatDate from "../utils/formatDate"
+
+
 
 export default function User({
 _id,
