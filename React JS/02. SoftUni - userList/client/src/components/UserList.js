@@ -8,6 +8,7 @@ import UserForm from "./UserForm";
 export default function UserList({
     users,
     addButton,
+    onCloseForm
   
 }) {
 
@@ -30,7 +31,7 @@ export default function UserList({
         
         <div className="table-wrapper">
             {selectedUser ? < UserDetails onClose={onClose} user={selectedUser} /> : null }
-            {addButton ? < UserForm  /> : null}
+            {addButton ? < UserForm onCloseForm={onCloseForm}  /> : null}
             {/* <!-- Overlap components  --> */}
 
             {/* <div className="loading-shade"> */}

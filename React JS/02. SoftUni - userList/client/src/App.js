@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import UserList from "./components/UserList";
+import AddButton from "./components/AddButton";
 
 
 
@@ -16,7 +17,6 @@ import UserList from "./components/UserList";
 function App() {
 
     const [users, setUsers] = useState([]);
- 
     useEffect(() => {
         userService.getAll()
         .then(users => {
@@ -25,17 +25,20 @@ function App() {
         .catch(err => {
             console.log(err.message)
         })
-    
-    },[])
+    },[]);
 
     const [addButton, setAddButton] = useState(false);
 
-    const onAddButtonClick = () => {
-        setAddButton(true)
+    const onAddClick = () => {
+        setAddButton(true);
+        console.log('adddd')
     }
 
+    const onCloseForm = () => {
+        setAddButton(false)
+    }
 
-
+  
 
     return (
         <>
@@ -44,9 +47,9 @@ function App() {
                 <section className="card users-container">
                     < Search />
 
-                    < UserList users={users} addButton={addButton} />
+                    < UserList users={users} addButton={addButton} onCloseForm={onCloseForm} />
 
-                    <button className="btn-add btn" onClick={()=> onAddButtonClick()}>Add new user</button>
+                    < AddButton onAddClick={onAddClick}/>
 
                 </section>
             </main>
