@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Search from "./components/Search";
 import UserList from "./components/UserList";
 import AddButton from "./components/AddButton";
+import Pagination from "./components/Pagination";
 
 
 
@@ -53,6 +54,8 @@ function App() {
                     < UserList users={users} addButton={addButton} onCloseForm={onCloseForm} createCallBack={createCallBack} />
 
                     < AddButton onAddClick={onAddClick}/>
+
+                    < Pagination />
 
                 </section>
             </main>
