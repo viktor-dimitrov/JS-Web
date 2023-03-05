@@ -21,7 +21,16 @@ export const createUser = async (body) => {
         body: JSON.stringify(body)
     })
     const result = await response.json();
-
     return result;
+}
 
+export const deleteUser = async (userId) => {
+        const response = await fetch(`${baseUrl}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    const result = await response.json();
+    return result
 }

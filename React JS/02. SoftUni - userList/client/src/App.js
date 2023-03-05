@@ -42,6 +42,10 @@ function App() {
             setUsers(state => [...state, user])
     }
 
+    const deleteCallBack = (userId) => {
+            setUsers( state => state = state.filter(u => u._id !== userId));
+    }
+
   
 
     return (
@@ -51,7 +55,7 @@ function App() {
                 <section className="card users-container">
                     < Search />
 
-                    < UserList users={users} addButton={addButton} onCloseForm={onCloseForm} createCallBack={createCallBack} />
+                    < UserList users={users} addButton={addButton} onCloseForm={onCloseForm} createCallBack={createCallBack} deleteCallBack={deleteCallBack} />
 
                     < AddButton onAddClick={onAddClick}/>
 

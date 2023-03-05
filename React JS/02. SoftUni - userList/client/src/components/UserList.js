@@ -3,13 +3,15 @@ import User from "./User"
 import UserDetails from "./UserDetails";
 import * as userService from "../services/userService";
 import UserForm from "./UserForm";
+import DeleteConfirmation from "./DeleteConfirmation";
 
 
 export default function UserList({
     users,
     addButton,
     onCloseForm,
-    createCallBack
+    createCallBack,
+    deleteCallBack
   
 }) {
 
@@ -24,14 +26,13 @@ export default function UserList({
  }
     const onClose = () => {
         setSelectedUser(null);
+        setForDelete(null)
     }
 
     const onUserCreate = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const { firstName, lastName, email, imageUrl, phoneNumber, country, city, street, streetNumber } = Object.fromEntries(formData);
-       
-
         const body = {
             firstName: firstName,
             lastName: lastName,
@@ -56,10 +57,30 @@ export default function UserList({
           })
     }
 
+    const [forDelete, setForDelete] = useState(null)
+
+    const onDeleteClick = (userId) => {
+        userService.getOne(userId)
+        .then(user => {
+            setForDelete(user);
+        })
+    }
+
+    const onConfirmDelete = (userId) => {
+        userService.deleteUser(userId)
+        .then(user => {
+            deleteCallBack(user.userId)
+        })
+
+        onClose();
+    }
+    
+
     return (
 
         <div className="table-wrapper">
             {selectedUser ? < UserDetails onClose={onClose} user={selectedUser} /> : null }
+            {forDelete? < DeleteConfirmation onClose={onClose} user={forDelete} onConfirmDelete={onConfirmDelete} /> : null }
             {addButton ? < UserForm onCloseForm={onCloseForm} onUserCreate={onUserCreate}  /> : null}
             {/* <!-- Overlap components  --> */}
 
@@ -189,7 +210,7 @@ export default function UserList({
                 <tbody>
                     {/* <!-- Table row component --> */}
                   
-                    {users.map(user => < User key={user._id} {...user} onInfoClick={onInfoClick} />)}
+                    {users.map(user => < User key={user._id} {...user} onInfoClick={onInfoClick} onDeleteClick={onDeleteClick} />)}
                      
                     
                 </tbody>
