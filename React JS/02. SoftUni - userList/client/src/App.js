@@ -31,11 +31,14 @@ function App() {
 
     const onAddClick = () => {
         setAddButton(true);
-        console.log('adddd')
     }
 
     const onCloseForm = () => {
         setAddButton(false)
+    }
+
+    const createCallBack = (user) => {
+            setUsers(state => [...state, user])
     }
 
   
@@ -47,7 +50,7 @@ function App() {
                 <section className="card users-container">
                     < Search />
 
-                    < UserList users={users} addButton={addButton} onCloseForm={onCloseForm} />
+                    < UserList users={users} addButton={addButton} onCloseForm={onCloseForm} createCallBack={createCallBack} />
 
                     < AddButton onAddClick={onAddClick}/>
 

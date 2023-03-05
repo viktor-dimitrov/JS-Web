@@ -8,11 +8,11 @@ import UserForm from "./UserForm";
 export default function UserList({
     users,
     addButton,
-    onCloseForm
+    onCloseForm,
+    createCallBack
   
 }) {
 
-    console.log(addButton)
      const [selectedUser, setSelectedUser] = useState(null);
 
      const onInfoClick = (_id) => {
@@ -26,12 +26,41 @@ export default function UserList({
         setSelectedUser(null);
     }
 
+    const onUserCreate = (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const { firstName, lastName, email, imageUrl, phoneNumber, country, city, street, streetNumber } = Object.fromEntries(formData);
+       
+
+        const body = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            imageUrl: imageUrl,
+            phoneNumber: phoneNumber,
+            address: {
+              country: country,
+              city: city,
+              street: street,
+              streetNumber: Number(streetNumber)
+            }
+          }
+
+          userService.createUser(body)
+          .then(result => {
+            createCallBack(result.user)
+            onCloseForm();
+          })
+          .catch(err => {
+            console.log(err.message)
+          })
+    }
+
     return (
 
-        
         <div className="table-wrapper">
             {selectedUser ? < UserDetails onClose={onClose} user={selectedUser} /> : null }
-            {addButton ? < UserForm onCloseForm={onCloseForm}  /> : null}
+            {addButton ? < UserForm onCloseForm={onCloseForm} onUserCreate={onUserCreate}  /> : null}
             {/* <!-- Overlap components  --> */}
 
             {/* <div className="loading-shade"> */}
@@ -159,6 +188,7 @@ export default function UserList({
                 </thead>
                 <tbody>
                     {/* <!-- Table row component --> */}
+                  
                     {users.map(user => < User key={user._id} {...user} onInfoClick={onInfoClick} />)}
                      
                     
