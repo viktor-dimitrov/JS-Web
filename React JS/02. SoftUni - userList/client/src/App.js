@@ -15,7 +15,7 @@ import UserList from "./components/UserList";
 
 function App() {
 
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([]);
  
     useEffect(() => {
         userService.getAll()
@@ -28,6 +28,12 @@ function App() {
     
     },[])
 
+    const [addButton, setAddButton] = useState(false);
+
+    const onAddButtonClick = () => {
+        setAddButton(true)
+    }
+
 
 
 
@@ -38,8 +44,9 @@ function App() {
                 <section className="card users-container">
                     < Search />
 
-                    < UserList users={users}/>
+                    < UserList users={users} addButton={addButton} />
 
+                    <button className="btn-add btn" onClick={()=> onAddButtonClick()}>Add new user</button>
 
                 </section>
             </main>

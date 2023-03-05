@@ -2,10 +2,16 @@ import { useState } from "react"
 import User from "./User"
 import UserDetails from "./UserDetails";
 import * as userService from "../services/userService";
+import UserForm from "./UserForm";
 
 
-export default function UserList({users}) {
+export default function UserList({
+    users,
+    addButton,
+  
+}) {
 
+    console.log(addButton)
      const [selectedUser, setSelectedUser] = useState(null);
 
      const onInfoClick = (_id) => {
@@ -24,6 +30,7 @@ export default function UserList({users}) {
         
         <div className="table-wrapper">
             {selectedUser ? < UserDetails onClose={onClose} user={selectedUser} /> : null }
+            {addButton ? < UserForm  /> : null}
             {/* <!-- Overlap components  --> */}
 
             {/* <div className="loading-shade"> */}

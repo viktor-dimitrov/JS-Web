@@ -34,7 +34,7 @@ export default function UserDetails({
                                 <strong> {user.firstName} {user.lastName} </strong>
                             </p>
                             <p>Email: <strong>{user.email}</strong></p>
-                            <p>Phone Number: <strong>{user.email}</strong></p>
+                            <p>Phone Number: <strong>{user.phoneNumber}</strong></p>
                             <p>
                                 Address:
                                 <strong> {user.address.country}, {user.address.city}, {user.address.street} {user.address.streetNumber} </strong>
